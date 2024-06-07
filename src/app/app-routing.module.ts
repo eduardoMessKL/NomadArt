@@ -5,7 +5,7 @@ import { SigninComponent } from './view/artista/signin/signin.component';
 import { ProfileComponent } from './view/artista/profile/profile.component';
 
 const routes: Routes = [
-  {path: '', redirectTo: '', pathMatch: 'full'},
+  {path: '', redirectTo: '/signin', pathMatch: 'full'},
   {path: 'signup', component: SignupComponent},
   {path: 'signin', component: SigninComponent},
   {path: 'profile', component: ProfileComponent}

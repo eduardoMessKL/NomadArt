@@ -1,1 +1,19 @@
-<p>profile works!</p>
+<div *ngIf="artist">
+    <h1>{{ artist.name }}</h1>
+    <p>Email: {{ artist.email }}</p>
+    <p>Descrição: {{ artist.profileDescription }}</p>
+    <p>País: {{ artist.country }}</p>
+    <p>Técnicas:</p>
+    <ul>
+      <li *ngIf="artist.techniques.oil">Óleo</li>
+      <li *ngIf="artist.techniques.acrylic">Acrílico</li>
+      <li *ngIf="artist.techniques.watercolor">Aquarela</li>
+      <li *ngIf="artist.techniques.digital">Digital</li>
+      <li *ngIf="artist.techniques.other">Outra</li>
+    </ul>
+    <img *ngIf="artist.profileImageUrl" [src]="artist.profileImageUrl" alt="Foto do perfil">
+  
+    <button (click)="logout()">Logout</button>
+    <button (click)="deleteProfile()">Deletar Perfil</button>
+  </div>
+  

@@ -21,7 +21,7 @@ console.log(environment)
     AppComponent,
     SignupComponent,
     SigninComponent,
-    ProfileComponent
+    ProfileComponent,
   ],
   imports: [
     BrowserModule,

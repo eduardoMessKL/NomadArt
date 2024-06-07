@@ -26,11 +26,8 @@ export class SigninComponent {
     .then(res =>{
       console.log('Login successful', res);
       this.alertService.showAlert('Login realizado com sucesso!')
+      this.router.navigate(['/profile']);
     })
-    this.navigateToProfile()
   }
 
-  navigateToProfile(){
-    this.router.navigate(['/profile']);
-  }
 }

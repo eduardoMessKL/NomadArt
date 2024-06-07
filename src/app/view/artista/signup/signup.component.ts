@@ -3,6 +3,7 @@ import { AuthService } from '../../../model/authService/auth.service';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { finalize } from 'rxjs/operators';
 import { AlertService } from 'src/app/common/alert.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-signup',
@@ -28,14 +29,14 @@ export class SignupComponent {
   selectedFile: File | null = null;
   errorMessage: string = ''
 
-  constructor(private authService: AuthService, private storage: AngularFireStorage, private alertService: AlertService) { }
+  constructor(private authService: AuthService, private storage: AngularFireStorage, private alertService: AlertService, private router: Router) { }
 
   onFileSelected(event: any) {
-    this.selectedFile = event.target.files[0];
+    this.selectedFile = event.target.files[0];  
   }
 
   onSubmit() {
-    if (!this.artist.name || !this.artist.email || !this.artist.password || !this.artist.confirmPassword || !this.artist.profileDescription || !this.artist.country || !this.artist.techniques ) {
+    if (!this.artist.name || !this.artist.email || !this.artist.password || !this.artist.confirmPassword || !this.artist.country || !this.artist.techniques ) {
       this.errorMessage = 'Preencha todos os campos!';
       return;
     }
@@ -73,6 +74,7 @@ export class SignupComponent {
           this.saveArtistProfile(userId, null);
         }
         this.alertService.showAlert('Cadastro realizado com sucesso!')
+        this.router.navigate(['/profile']);
       })
       .catch(error => {
         console.error('Error registering artist', error);

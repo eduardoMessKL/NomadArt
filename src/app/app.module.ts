@@ -12,6 +12,7 @@ import { AngularFireStorageModule } from '@angular/fire/compat/storage';
 import { SignupComponent } from './view/artista/signup/signup.component';
 import { SigninComponent } from './view/artista/signin/signin.component';
 import { FormsModule } from '@angular/forms';
+import { ProfileComponent } from './view/artista/profile/profile.component';
 
 console.log(environment)
 
@@ -19,7 +20,8 @@ console.log(environment)
   declarations: [
     AppComponent,
     SignupComponent,
-    SigninComponent
+    SigninComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,

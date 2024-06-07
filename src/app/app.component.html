@@ -1,4 +1,7 @@
+<div *ngIf="alertMessage" class="alert">
+    {{ alertMessage }}
+</div>
 <h1>Bem-vindo ao NomadArt!</h1>
-<button routerLink="/signup">Ir para Cadastro</button>
-<button (click)="navigateToSignin()">Ir para Login</button>
+<button routerLink="/signup">Cadastro</button>
+<button (click)="navigateToSignin()">Login</button>
 <router-outlet></router-outlet>

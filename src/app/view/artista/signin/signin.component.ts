@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
+import { AlertService } from 'src/app/common/alert.service';
 import { AuthService } from 'src/app/model/service/auth.service';
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-signin',
@@ -9,18 +12,25 @@ import { AuthService } from 'src/app/model/service/auth.service';
 export class SigninComponent {
   email: string = ''
   password: string = ''
+  errorMessage: string = ''
 
-  constructor(private authService: AuthService){}
+  constructor(private router: Router, private authService: AuthService, private alertService: AlertService){}
 
   onSubmit(){
+    if (!this.email || !this.password){
+      this.errorMessage =  "Preencha todos os campos para realizar Login!"
+      return
+    }
+
     this.authService.login(this.email, this.password)
-      .then(res => {
-        console.log('Login successful', res);
-      })
-      .catch(err =>{
-        console.log('Error during login', err);
-        alert('Login falhou. Verifique suas credenciais e tente novamente.')
-      })
+    .then(res =>{
+      console.log('Login successful', res);
+      this.alertService.showAlert('Login realizado com sucesso!')
+    })
+    this.navigateToProfile()
   }
 
+  navigateToProfile(){
+    this.router.navigate(['/profile']);
+  }
 }

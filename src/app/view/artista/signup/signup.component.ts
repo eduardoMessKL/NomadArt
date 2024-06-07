@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { AuthService } from '../../../model/service/auth.service';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { finalize } from 'rxjs/operators';
+import { AlertService } from 'src/app/common/alert.service';
 
 @Component({
   selector: 'app-signup',
@@ -25,18 +26,34 @@ export class SignupComponent {
     }
   };
   selectedFile: File | null = null;
+  errorMessage: string = ''
 
-  constructor(private authService: AuthService, private storage: AngularFireStorage) { }
+  constructor(private authService: AuthService, private storage: AngularFireStorage, private alertService: AlertService) { }
 
   onFileSelected(event: any) {
     this.selectedFile = event.target.files[0];
   }
 
   onSubmit() {
-    if (this.artist.password !== this.artist.confirmPassword) {
-      alert('Passwords do not match!');
+    if (!this.artist.name || !this.artist.email || !this.artist.password || !this.artist.confirmPassword || !this.artist.profileDescription || !this.artist.country || !this.artist.techniques ) {
+      this.errorMessage = 'Preencha todos os campos!';
       return;
     }
+
+    if (this.artist.password !== this.artist.confirmPassword) {
+      this.errorMessage = 'As senhas não coincidem!';
+      return;
+    }
+
+    if (this.artist.password.length < 6) {
+      this.errorMessage = 'Mínimo de caracteres para a senha é de 6 elementos!';
+      return;
+    }
+
+    if (this.artist.profileDescription > 200){
+      this.errorMessage = 'Máximo de caracteres para a descrição é de 200 elementos!'
+    }
+
     this.authService.register(this.artist.email, this.artist.password)
       .then(res => {
         const userId = res.user?.uid; // Pega o UID do usuário
@@ -55,9 +72,11 @@ export class SignupComponent {
         } else if (userId) {
           this.saveArtistProfile(userId, null);
         }
+        this.alertService.showAlert('Cadastro realizado com sucesso!')
       })
       .catch(error => {
         console.error('Error registering artist', error);
+        this.errorMessage = this.getErrorMessage(error)
       });
   }
 
@@ -77,5 +96,17 @@ export class SignupComponent {
       .catch(error => {
         console.error('Error saving artist profile', error);
       });
+  }
+
+  getErrorMessage(error: any): string {
+    if (error.code === 'auth/email-already-in-use') {
+      return 'E-mail já cadastrado';
+    } else if (error.code === 'auth/invalid-email') {
+      return 'Formato de email invalido';
+    } else if (error.code === 'auth/weak-password') {
+      return 'Mínimo de caracteres para a senha é de 6 elementos';
+    } else {
+      return 'Ocorreu um erro. Tente novamente.';
+    }
   }
 }

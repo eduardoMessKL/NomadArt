@@ -1,0 +1,30 @@
+<form (ngSubmit)="onSubmit()" #signupForm="ngForm">
+    <input type="text" [(ngModel)]="artist.name" name="name" placeholder="Nome" required>
+    <input type="email" [(ngModel)]="artist.email" name="email" placeholder="Email" required>
+    <input type="password" [(ngModel)]="artist.password" name="password" placeholder="Senha" required>
+    <input type="password" [(ngModel)]="artist.confirmPassword" name="confirmPassword" placeholder="Repetir Senha" required>
+    
+    <textarea [(ngModel)]="artist.profileDescription" name="profileDescription" placeholder="Descrição do perfil" maxlength="200"></textarea>
+    <input type="text" [(ngModel)]="artist.country" name="country" placeholder="País de origem">
+    
+    <label>
+      <input type="checkbox" [(ngModel)]="artist.techniques.oil" name="techniques.oil"> Óleo
+    </label>
+    <label>
+      <input type="checkbox" [(ngModel)]="artist.techniques.acrylic" name="techniques.acrylic"> Acrílico
+    </label>
+    <label>
+      <input type="checkbox" [(ngModel)]="artist.techniques.watercolor" name="techniques.watercolor"> Aquarela
+    </label>
+    <label>
+      <input type="checkbox" [(ngModel)]="artist.techniques.digital" name="techniques.digital"> Digital
+    </label>
+    <label>
+      <input type="checkbox" [(ngModel)]="artist.techniques.other" name="techniques.other"> Outra
+    </label>
+    
+    <input type="file" (change)="onFileSelected($event)">
+    
+    <button type="submit">Registrar-se</button>
+  </form>
+  

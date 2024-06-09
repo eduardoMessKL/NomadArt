@@ -13,6 +13,8 @@ import { SignupComponent } from './view/artista/signup/signup.component';
 import { SigninComponent } from './view/artista/signin/signin.component';
 import { FormsModule } from '@angular/forms';
 import { ProfileComponent } from './view/artista/profile/profile.component';
+import { EditComponent } from './view/artista/edit/edit.component';
+import { ProfileEditComponent } from './view/artista/profile-edit/profile-edit.component';
 
 console.log(environment)
 
@@ -22,6 +24,8 @@ console.log(environment)
     SignupComponent,
     SigninComponent,
     ProfileComponent,
+    EditComponent,
+    ProfileEditComponent,
   ],
   imports: [
     BrowserModule,

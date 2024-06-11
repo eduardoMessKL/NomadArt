@@ -1,7 +1,4 @@
-<div *ngIf="alertMessage" class="alert">
-    {{ alertMessage }}
-</div>
-<h1>Bem-vindo ao NomadArt!</h1>
-<button routerLink="/signup">Cadastro</button>
-<button (click)="navigateToSignin()">Login</button>
+<app-header></app-header>
 <router-outlet></router-outlet>
+<app-footer></app-footer>
+

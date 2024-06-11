@@ -1,0 +1,20 @@
+<!--Header caso o usuário não esteja logado-->
+<div class="header-user-not-logged"> <!--If user not logged:-->
+    <div *ngIf="alertMessage" class="alert"> {{ alertMessage }} </div>
+    <h1>Bem-vindo ao NomadArt!</h1>
+    <button (click)="navigateToSignup()">Cadastro</button>
+    <button (click)="navigateToSignin()">Login</button>
+    <button (click)="navigateToProfile()">Perfil</button>
+</div>
+
+
+<!--Header caso o usuário ja esteja logado
+<div class="header-user-logged"> If user logged:
+    <div *ngIf="alertMessage" class="alert"> {{ alertMessage }} </div>
+    <h1>Bem-vindo ao NomadArt!</h1>
+    Barra de pesquisa AQUI
+    <button (click)="navigateToProfile()">Perfil</button>
+    <button (click)="navigateToPublish()">Postar</button>
+    <button (click)="navigateToFavorites()">Salvos</button>
+    <router-outlet></router-outlet>
+</div>-->

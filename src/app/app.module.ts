@@ -16,6 +16,9 @@ import { ProfileComponent } from './view/artista/profile/profile.component';
 import { EditProfileComponent } from './view/artista/edit-profile/edit-profile.component';
 import { HeaderComponent } from './view/components/header/header.component';
 import { FooterComponent } from './view/components/footer/footer.component';
+import { DescriptionComponent } from './view/arte/description/description.component';
+import { PublishComponent } from './view/arte/publish/publish.component';
+import { EditArtComponent } from './view/arte/edit-art/edit-art.component';
 
 console.log(environment)
 
@@ -28,6 +31,9 @@ console.log(environment)
     EditProfileComponent,
     HeaderComponent,
     FooterComponent,
+    DescriptionComponent,
+    PublishComponent,
+    EditArtComponent,
   ],
   imports: [
     BrowserModule,

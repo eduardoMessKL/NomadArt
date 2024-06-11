@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
-import { AuthService } from '../../../model/authService/auth.service';
+import { Router } from '@angular/router';
+import { AuthService } from '../../../model/service/authService/auth.service';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { finalize } from 'rxjs/operators';
 import { AlertService } from 'src/app/common/alert.service';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-signup',
@@ -27,16 +27,21 @@ export class SignupComponent {
     }
   };
   selectedFile: File | null = null;
-  errorMessage: string = ''
+  errorMessage: string = '';
 
-  constructor(private authService: AuthService, private storage: AngularFireStorage, private alertService: AlertService, private router: Router) { }
+  constructor(
+    private authService: AuthService,
+    private storage: AngularFireStorage,
+    private alertService: AlertService,
+    private router: Router
+  ) { }
 
   onFileSelected(event: any) {
-    this.selectedFile = event.target.files[0];  
+    this.selectedFile = event.target.files[0];
   }
 
   onSubmit() {
-    if (!this.artist.name || !this.artist.email || !this.artist.password || !this.artist.confirmPassword || !this.artist.country || !this.artist.techniques ) {
+    if (!this.artist.name || !this.artist.email || !this.artist.password || !this.artist.confirmPassword || !this.artist.profileDescription || !this.artist.country || !this.artist.techniques) {
       this.errorMessage = 'Preencha todos os campos!';
       return;
     }
@@ -51,41 +56,41 @@ export class SignupComponent {
       return;
     }
 
-    if (this.artist.profileDescription > 200){
-      this.errorMessage = 'Máximo de caracteres para a descrição é de 200 elementos!'
+    if (this.artist.profileDescription.length > 200) {
+      this.errorMessage = 'Máximo de caracteres para a descrição é de 200 elementos!';
+      return;
     }
 
     this.authService.register(this.artist.email, this.artist.password)
       .then(res => {
         const userId = res.user?.uid; // Pega o UID do usuário
-        if (this.selectedFile && userId) {
-          const filePath = `profile_images/${userId}`;
-          const fileRef = this.storage.ref(filePath);
-          const uploadTask = this.storage.upload(filePath, this.selectedFile);
+        if (userId) {
+          if (this.selectedFile) {
+            const filePath = `profile_images/${userId}`;
+            const fileRef = this.storage.ref(filePath);
+            const uploadTask = this.storage.upload(filePath, this.selectedFile);
 
-          uploadTask.snapshotChanges().pipe(
-            finalize(() => {
-              fileRef.getDownloadURL().subscribe(url => {
-                this.saveArtistProfile(userId, url);
-              });
-            })
-          ).subscribe();
-        } else if (userId) {
-          this.saveArtistProfile(userId, null);
+            uploadTask.snapshotChanges().pipe(
+              finalize(() => {
+                fileRef.getDownloadURL().subscribe(url => {
+                  this.saveArtistProfile(userId, url);
+                });
+              })
+            ).subscribe();
+          } else {
+            this.saveArtistProfile(userId, null);
+          }
         }
-        this.alertService.showAlert('Cadastro realizado com sucesso!')
-        this.router.navigate(['/profile']);
       })
       .catch(error => {
         console.error('Error registering artist', error);
-        this.errorMessage = this.getErrorMessage(error)
+        this.errorMessage = this.getErrorMessage(error);
       });
   }
 
   saveArtistProfile(artistId: string, profileImageUrl: string | null) {
     const artistProfile = {
       name: this.artist.name,
-      email: this.artist.email,
       profileDescription: this.artist.profileDescription,
       country: this.artist.country,
       techniques: this.artist.techniques,
@@ -93,7 +98,8 @@ export class SignupComponent {
     };
     this.authService.saveArtistProfile(artistId, artistProfile)
       .then(() => {
-        console.log('Artist profile saved successfully');
+        this.alertService.showAlert('Cadastro realizado com sucesso!');
+        this.router.navigate([`/profile/${artistId}`]);
       })
       .catch(error => {
         console.error('Error saving artist profile', error);
@@ -104,7 +110,7 @@ export class SignupComponent {
     if (error.code === 'auth/email-already-in-use') {
       return 'E-mail já cadastrado';
     } else if (error.code === 'auth/invalid-email') {
-      return 'Formato de email invalido';
+      return 'Formato de email inválido';
     } else if (error.code === 'auth/weak-password') {
       return 'Mínimo de caracteres para a senha é de 6 elementos';
     } else {

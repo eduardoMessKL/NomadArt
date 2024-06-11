@@ -1,0 +1,46 @@
+<div *ngIf="artist">
+    <h2>Editar Perfil</h2>
+    <form (submit)="onSubmit()">
+      <div>
+        <label for="name">Nome:</label>
+        <input type="text" id="name" [(ngModel)]="artist.name" name="name">
+      </div>
+      <div>
+        <label for="profileDescription">Descrição do Perfil:</label>
+        <textarea id="profileDescription" [(ngModel)]="artist.profileDescription" name="profileDescription" maxlength="200"></textarea>
+      </div>
+      <div>
+        <label for="country">País de Origem:</label>
+        <input type="text" id="country" [(ngModel)]="artist.country" name="country">
+      </div>
+      <div>
+        <label>Técnicas de Pintura:</label>
+        <div>
+          <label>
+            <input type="checkbox" [(ngModel)]="artist.techniques.oil" name="oil"> Óleo
+          </label>
+          <label>
+            <input type="checkbox" [(ngModel)]="artist.techniques.acrylic" name="acrylic"> Acrílico
+          </label>
+          <label>
+            <input type="checkbox" [(ngModel)]="artist.techniques.watercolor" name="watercolor"> Aquarela
+          </label>
+          <label>
+            <input type="checkbox" [(ngModel)]="artist.techniques.digital" name="digital"> Digital
+          </label>
+          <label>
+            <input type="checkbox" [(ngModel)]="artist.techniques.other" name="other"> Outra
+          </label>
+        </div>
+      </div>
+      <div>
+        <label for="profileImage">Foto de Perfil:</label>
+        <input type="file" id="profileImage" (change)="onFileSelected($event)">
+        <img [src]="artist.profileImageUrl" alt="Profile Image" *ngIf="artist.profileImageUrl">
+      </div>
+      <button type="submit">Concluir</button>
+      <button (click)="cancelar()">Cancelar</button>
+      <p *ngIf="errorMessage">{{ errorMessage }}</p>
+    </form>
+  </div>
+  

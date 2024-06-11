@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { AuthService } from '../../../model/service/authService/auth.service';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
-import { Router } from '@angular/router';
-import { AlertService } from 'src/app/common/alert.service';
-import { AuthService } from 'src/app/model/authService/auth.service';
 
 @Component({
   selector: 'app-profile',
@@ -12,57 +11,49 @@ import { AuthService } from 'src/app/model/authService/auth.service';
 export class ProfileComponent implements OnInit {
   artist: any = null;
   userId: string | null = null;
+  currentUserId: string | null = null; // Adicione uma variável para armazenar o ID do usuário logado
 
   constructor(
+    private route: ActivatedRoute,
     private authService: AuthService,
-    private fireAuth: AngularFireAuth,
     private router: Router,
-    private alertService: AlertService
+    
   ) { }
 
-  ngOnInit(): void {
-    this.fireAuth.authState.subscribe(user => {
-      if (user) {
-        this.userId = user.uid;
-        this.loadArtistProfile(this.userId);
-      } else {
+ async ngOnInit(): Promise<void> {
+    this.userId = this.route.snapshot.paramMap.get('id');
+    this.currentUserId = await this.authService.getCurrentUserId();
+
+    if (this.userId) {
+      this.authService.getArtistProfile(this.userId).subscribe(artist => {
+        this.artist = artist;
+      });
+    }
+    console.log('Id cadastrado:', this.currentUserId)
+  }
+
+  logout(): void {
+    if (confirm('Você tem certeza que quer sair?')) {
+      this.authService.logout().then(() => {
         this.router.navigate(['/signin']);
-      }
-    });
-  }
-
-  loadArtistProfile(userId: string) {
-    this.authService.getArtistProfile(userId).subscribe(artistProfile => {
-      this.artist = artistProfile;
-    }, error => {
-      console.error('Error loading artist profile', error);
-      this.alertService.showAlert('Erro ao carregar perfil!');
-    });
-  }
-
-  logout() {
-    const confirmed = window.confirm('Você tem certeza que deseja sair?')
-    if (confirmed){
-    this.authService.logout().then(() => {
-      this.router.navigate(['/signin']);
-    });
-    console.log('Logout successful')
-  }
-  }
-
-  deleteProfile() {
-    const confirmed = window.confirm('Você tem certeza que deseja apagar seu perfil?')
-    if (this.userId && confirmed) {
-      this.authService.deleteArtistProfile(this.userId).then(() => {
-        this.authService.logout().then(() => {
-          this.router.navigate(['/signin']);
-        });
-        this.alertService.showAlert('Perfil deletado com sucesso!');
-        console.log('Profile Delete successful')
-      }).catch(error => {
-        console.error('Error deleting profile', error);
-        this.alertService.showAlert('Erro ao deletar o perfil.');
       });
     }
   }
+
+  deleteProfile(): void {
+    if (confirm('Você tem certeza que quer deletar o perfil?')) {
+      if (this.userId) {
+        this.authService.deleteArtistProfile(this.userId).then(() => {
+          this.router.navigate(['/signin']);
+        });
+      }
+    }
+  }
+
+  updateProfile(): void {
+    if (this.userId) {
+      this.router.navigate([`/profile/${this.userId}/edit`]);
+    }
+  }
+
 }

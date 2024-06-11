@@ -12,8 +12,11 @@
       <li *ngIf="artist.techniques.other">Outra</li>
     </ul>
     <img *ngIf="artist.profileImageUrl" [src]="artist.profileImageUrl" alt="Foto do perfil">
-  
-    <button (click)="logout()">Logout</button>
-    <button (click)="deleteProfile()">Deletar Perfil</button>
+
+    <div *ngIf="currentUserId === userId">
+      <button (click)="logout()">Logout</button>
+      <button (click)="deleteProfile()">Deletar Perfil</button>
+      <button (click)="updateProfile()">Editar Perfil</button>
+    </div>
   </div>
   

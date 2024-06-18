@@ -37,24 +37,23 @@ export class AuthService {
     return this.firestore.collection('artistas').doc(userId).set(userProfile);
   }
 
-    // Obter perfil do artista
-    getArtistProfile(userId: string): Observable<any> {
-      return this.firestore.collection('artistas').doc(userId).valueChanges();
-    }
+  // Obter perfil do artista
+  getArtistProfile(userId: string): Observable<any> {
+    return this.firestore.collection('artistas').doc(userId).valueChanges();
+  }
   
-    // Deletar perfil do artista
-    deleteArtistProfile(userId: string): Promise<void> {
-      return this.firestore.collection('artistas').doc(userId).delete();
-    }
+  // Deletar perfil do artista
+  deleteArtistProfile(userId: string): Promise<void> {
+    return this.firestore.collection('artistas').doc(userId).delete();
+  }
 
-    // Atualizar perfil do artista
-    updateArtistProfile(userId: string, userProfile: any){
-      return this.firestore.collection('artistas').doc(userId).update(userProfile);
-    }
+  // Atualizar perfil do artista
+  updateArtistProfile(userId: string, userProfile: any){
+    return this.firestore.collection('artistas').doc(userId).update(userProfile);
+  }
 
-    async getCurrentUserId(): Promise<string | null> {
-      const user = await this.fireAuth.currentUser;
-      return user ? user.uid : null;
-    }
-  
+  async getCurrentUserId(): Promise<string | null> {
+    const user = await this.fireAuth.currentUser;
+    return user ? user.uid : null;
+  }  
 }

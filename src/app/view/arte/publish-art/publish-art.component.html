@@ -1,4 +1,3 @@
-<div *ngIf="currentUserId === userId">   
   <h2>Publicar Arte</h2>
   <form (ngSubmit)="onSubmit()">
     <label for="title">Título</label>
@@ -28,8 +27,3 @@
 
     <button type="submit">Publicar Arte</button>
   </form>
-</div>
-
-<div *ngIf="currentUserId != userId">
-  <app-notfound></app-notfound>
-</div>

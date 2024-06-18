@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '../../../model/service/authService/auth.service';
-import { AngularFireAuth } from '@angular/fire/compat/auth';
 
 @Component({
   selector: 'app-profile',
@@ -29,7 +28,7 @@ export class ProfileComponent implements OnInit {
         this.artist = artist;
       });
     }
-    console.log('Id cadastrado:', this.currentUserId)
+    console.log('Usuáio Logado: ', this.authService.getCurrentUserId())
   }
 
   logout(): void {
@@ -45,6 +44,7 @@ export class ProfileComponent implements OnInit {
       if (this.userId) {
         this.authService.deleteArtistProfile(this.userId).then(() => {
           this.router.navigate(['/signin']);
+          console.log("Perfil excluído com sucesso!")
         });
       }
     }
@@ -53,7 +53,12 @@ export class ProfileComponent implements OnInit {
   updateProfile(): void {
     if (this.userId) {
       this.router.navigate([`/profile/${this.userId}/edit`]);
+      console.log("Perfil editado com sucesso!")
     }
+  }
+
+  manageArt() {
+    this.router.navigate([`/profile/${this.userId}/manage-art`]);
   }
 
 }

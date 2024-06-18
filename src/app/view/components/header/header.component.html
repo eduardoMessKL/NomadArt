@@ -2,9 +2,11 @@
 <div class="header-user-not-logged"> <!--If user not logged:-->
     <div *ngIf="alertMessage" class="alert"> {{ alertMessage }} </div>
     <h1>Bem-vindo ao NomadArt!</h1>
-    <button (click)="navigateToSignup()">Cadastro</button>
-    <button (click)="navigateToSignin()">Login</button>
-    <button (click)="navigateToProfile()">Perfil</button>
+    <button (click)="navigateToSignup()" *ngIf="currentUserId == null">Cadastro</button>
+    <button (click)="navigateToSignin()" *ngIf="currentUserId == null">Login</button>
+    <button (click)="navigateToProfile()" *ngIf="currentUserId === userId">Perfil</button>
+    <button (click)="navigateToHome()" *ngIf="currentUserId === userId">Home</button>
+    <button (click)="navigateToPublish()" *ngIf="currentUserId === userId">Publicar</button>
 </div>
 
 

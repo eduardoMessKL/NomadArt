@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AlertService } from 'src/app/common/alert.service';
 import { AuthService } from 'src/app/model/service/authService/auth.service';
 
@@ -10,24 +10,46 @@ import { AuthService } from 'src/app/model/service/authService/auth.service';
 })
 export class HeaderComponent implements OnInit {
   alertMessage: string = '';
+  userId: string | null = null;
+  currentUserId: string | null = null; 
 
-  constructor(private router: Router, private alertService: AlertService, private authService: AuthService) {}
+  constructor(
+    private router: Router, 
+    private route: ActivatedRoute,
+    private alertService: AlertService, 
+    private authService: AuthService
+  ) {}
 
-  ngOnInit(): void {
-    this.alertService.alert$.subscribe(message => {
-      this.alertMessage = message;
-      if (message) {
-        setTimeout(() => this.alertService.clearAlert(), 500);
-      }
-    });
+  async ngOnInit(): Promise<void> {
+    this.userId = this.route.snapshot.paramMap.get('id');
+    this.currentUserId = await this.authService.getCurrentUserId();
   }
 
-  navigateToSignup(): void {
-    this.router.navigate(['/signup']);
+  async navigateToSignup(): Promise<void> {
+    const userId = await this.authService.getCurrentUserId()
+    if(userId){
+      console.error('User already looged in')
+    } else {
+      this.router.navigate(['/signup']);
+    }
   }
 
-  navigateToSignin(): void {
-    this.router.navigate(['/signin']);
+  async navigateToSignin(): Promise<void> {
+    const userId = await this.authService.getCurrentUserId()
+    if (userId){
+      console.error('User already logged in')
+    } else{
+      this.router.navigate(['/signin']);
+    }
+  }
+
+  async navigateToPublish(): Promise<void> {
+    const userId = await this.authService.getCurrentUserId();
+    if (userId) {
+      this.router.navigate([`profile/${userId}/publish-art`]);
+    } else {
+      console.error('User not logged in');
+    }
   }
 
   async navigateToProfile(): Promise<void> {
@@ -35,8 +57,11 @@ export class HeaderComponent implements OnInit {
     if (userId) {
       this.router.navigate([`profile/${userId}`]);
     } else {
-      // Handle case when user is not logged in
       console.error('User not logged in');
     }
+  }
+
+  navigateToHome(){
+    this.router.navigate(['/art-catalog'])
   }
 }

@@ -1,6 +1,8 @@
-<div *ngIf="artist">
+<div *ngIf="artist && currentUserId === userId">
     <h2>Editar Perfil</h2>
-    <form (submit)="onSubmit()">
+    <button (click)="cancelar()">Voltar</button>
+
+    <form (ngSubmit)="onSubmit()">
       <div>
         <label for="name">Nome:</label>
         <input type="text" id="name" [(ngModel)]="artist.name" name="name">
@@ -42,5 +44,9 @@
       <button (click)="cancelar()">Cancelar</button>
       <p *ngIf="errorMessage">{{ errorMessage }}</p>
     </form>
+  </div>
+  
+  <div *ngIf="currentUserId != userId">
+    <app-notfound></app-notfound>
   </div>
   

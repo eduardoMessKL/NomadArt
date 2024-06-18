@@ -26,6 +26,8 @@ export class EditProfileComponent implements OnInit {
   artistId: string;
   selectedFile: File | null = null;
   errorMessage: string = '';
+  userId: any;
+  currentUserId: any
 
   constructor(
     private route: ActivatedRoute,
@@ -37,10 +39,14 @@ export class EditProfileComponent implements OnInit {
     this.artistId = this.route.snapshot.paramMap.get('id')!;
   }
 
-  ngOnInit() {
+  async ngOnInit() {
+    this.userId = this.route.snapshot.paramMap.get('id');
+    this.currentUserId = await this.authService.getCurrentUserId();  
+
     this.authService.getArtistProfile(this.artistId).subscribe(artist => {
       this.artist = artist;
     });
+    console.log('Usuáio Logado: ', this.authService.getCurrentUserId())
   }
 
   onFileSelected(event: any) {

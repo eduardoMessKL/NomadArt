@@ -1,0 +1,35 @@
+<div *ngIf="currentUserId === userId">   
+  <h2>Publicar Arte</h2>
+  <form (ngSubmit)="onSubmit()">
+    <label for="title">Título</label>
+    <input id="title" [(ngModel)]="art.title" name="title" required>
+    
+    <label for="description">Descrição</label>
+    <textarea id="description" [(ngModel)]="art.description" name="description" required></textarea>
+    
+    <label for="file">Imagem</label>
+    <input type="file" id="file" (change)="onFileSelected($event)">
+    
+    <label>
+      <input type="checkbox" [(ngModel)]="art.technique.oil" name="techniques.oil"> Óleo
+    </label>
+    <label>
+      <input type="checkbox" [(ngModel)]="art.technique.acrylic" name="techniques.acrylic"> Acrílico
+    </label>
+    <label>
+      <input type="checkbox" [(ngModel)]="art.technique.watercolor" name="techniques.watercolor"> Aquarela
+    </label>
+    <label>
+      <input type="checkbox" [(ngModel)]="art.technique.digital" name="techniques.digital"> Digital
+    </label>
+    <label>
+      <input type="checkbox" [(ngModel)]="art.technique.other" name="techniques.other"> Outra
+    </label>
+
+    <button type="submit">Publicar Arte</button>
+  </form>
+</div>
+
+<div *ngIf="currentUserId != userId">
+  <app-notfound></app-notfound>
+</div>

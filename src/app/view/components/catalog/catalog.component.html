@@ -1,0 +1,5 @@
+<h2>Galeria de Artes</h2>
+<div *ngFor="let artwork of artworks" (click)="viewArtwork(artwork.artistId, artwork.id)">
+  <img [src]="artwork.imageUrl" alt="Art Image" />
+  <p>{{ artwork.title }}</p>
+</div>

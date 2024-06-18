@@ -16,9 +16,12 @@ import { ProfileComponent } from './view/artista/profile/profile.component';
 import { EditProfileComponent } from './view/artista/edit-profile/edit-profile.component';
 import { HeaderComponent } from './view/components/header/header.component';
 import { FooterComponent } from './view/components/footer/footer.component';
-import { DescriptionComponent } from './view/arte/description/description.component';
-import { PublishComponent } from './view/arte/publish/publish.component';
+import { ManageArtComponent } from './view/arte/manage-art/manage-art.component';
+import { PublishArtComponent } from './view/arte/publish-art/publish-art.component';
 import { EditArtComponent } from './view/arte/edit-art/edit-art.component';
+import { ArtDetailComponent } from './view/arte/art-detail/art-detail.component';
+import { CatalogComponent } from './view/components/catalog/catalog.component';
+import { NotfoundComponent } from './view/components/notfound/notfound.component';
 
 console.log(environment)
 
@@ -31,9 +34,12 @@ console.log(environment)
     EditProfileComponent,
     HeaderComponent,
     FooterComponent,
-    DescriptionComponent,
-    PublishComponent,
+    ManageArtComponent,
+    PublishArtComponent,
     EditArtComponent,
+    ArtDetailComponent,
+    CatalogComponent,
+    NotfoundComponent,
   ],
   imports: [
     BrowserModule,

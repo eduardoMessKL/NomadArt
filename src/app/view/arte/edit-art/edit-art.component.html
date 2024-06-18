@@ -1,1 +1,17 @@
-<p>edit-art works!</p>
+  <h2>Editar Arte</h2>
+  <button (click)="backToManage()">Voltar</button>
+  
+  <form (ngSubmit)="onSubmit()">
+    <label for="title">Título</label>
+    <input id="title" [(ngModel)]="art.title" name="title" required>
+    
+    <label for="description">Descrição</label>
+    <textarea id="description" [(ngModel)]="art.description" name="description" required></textarea>
+    
+    <label for="file">Imagem</label>
+    <input type="file" id="file" (change)="onFileSelected($event)">
+    
+    <button type="submit">Salvar</button>
+  </form>
+  <button (click)=deleteArt()>Excluir Arte</button>
+

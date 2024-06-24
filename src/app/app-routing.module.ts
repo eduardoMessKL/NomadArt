@@ -11,7 +11,6 @@ import { CatalogComponent } from './view/components/catalog/catalog.component';
 import { NotfoundComponent } from './view/components/notfound/notfound.component';
 import { DescriptionArtComponent } from './view/arte/description-art/description-art.component';
 import { AuthGuard } from './common/guard/auth.guard';
-import { SearchResultsComponent } from './view/components/search-results/search-results.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/catalog', pathMatch: 'full'},
@@ -25,7 +24,6 @@ const routes: Routes = [
   { path: 'profile/:id/edit-art/:artId', component: EditArtComponent, canActivate: [AuthGuard] },
   { path: 'catalog', component: CatalogComponent},
   { path: 'description-art/:artistId/:artId', component: DescriptionArtComponent },
-  { path: 'search-results', component: SearchResultsComponent}
 
 ];
 

@@ -22,7 +22,6 @@ import { EditArtComponent } from './view/arte/edit-art/edit-art.component';
 import { CatalogComponent } from './view/components/catalog/catalog.component';
 import { NotfoundComponent } from './view/components/notfound/notfound.component';
 import { DescriptionArtComponent } from './view/arte/description-art/description-art.component';
-import { SearchResultsComponent } from './view/components/search-results/search-results.component';
 
 console.log(environment)
 
@@ -41,7 +40,6 @@ console.log(environment)
     CatalogComponent,
     NotfoundComponent,
     DescriptionArtComponent,
-    SearchResultsComponent,
   ],
   imports: [
     BrowserModule,

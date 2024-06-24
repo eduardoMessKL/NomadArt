@@ -7,22 +7,25 @@ import { EditProfileComponent } from './view/artista/edit-profile/edit-profile.c
 import { ManageArtComponent } from './view/arte/manage-art/manage-art.component';
 import { PublishArtComponent } from './view/arte/publish-art/publish-art.component';
 import { EditArtComponent } from './view/arte/edit-art/edit-art.component';
-import { ArtDetailComponent } from './view/arte/art-detail/art-detail.component';
 import { CatalogComponent } from './view/components/catalog/catalog.component';
 import { NotfoundComponent } from './view/components/notfound/notfound.component';
+import { DescriptionArtComponent } from './view/arte/description-art/description-art.component';
+import { AuthGuard } from './common/guard/auth.guard';
+import { SearchResultsComponent } from './view/components/search-results/search-results.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/art-catalog', pathMatch: 'full'},
+  { path: '', redirectTo: '/catalog', pathMatch: 'full'},
   { path: 'notfound', component: NotfoundComponent},
   { path: 'signup', component: SignupComponent},
   { path: 'signin', component: SigninComponent},
-  { path: 'art-catalog', component: CatalogComponent},
   { path: 'profile/:id', component: ProfileComponent },
-  { path: 'profile/:id/edit', component: EditProfileComponent },
-  { path: 'profile/:id/manage-art', component: ManageArtComponent },
-  { path: 'profile/:id/publish-art', component: PublishArtComponent },
-  { path: 'profile/:id/edit-art/:artId', component: EditArtComponent },
-  { path: 'art/:artistId/:artId', component: ArtDetailComponent },
+  { path: 'profile/:id/edit', component: EditProfileComponent, canActivate: [AuthGuard] },
+  { path: 'profile/:id/manage-art', component: ManageArtComponent, canActivate: [AuthGuard] },
+  { path: 'profile/:id/publish-art', component: PublishArtComponent, canActivate: [AuthGuard] },
+  { path: 'profile/:id/edit-art/:artId', component: EditArtComponent, canActivate: [AuthGuard] },
+  { path: 'catalog', component: CatalogComponent},
+  { path: 'description-art/:artistId/:artId', component: DescriptionArtComponent },
+  { path: 'search-results', component: SearchResultsComponent}
 
 ];
 

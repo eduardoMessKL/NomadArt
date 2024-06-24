@@ -19,9 +19,10 @@ import { FooterComponent } from './view/components/footer/footer.component';
 import { ManageArtComponent } from './view/arte/manage-art/manage-art.component';
 import { PublishArtComponent } from './view/arte/publish-art/publish-art.component';
 import { EditArtComponent } from './view/arte/edit-art/edit-art.component';
-import { ArtDetailComponent } from './view/arte/art-detail/art-detail.component';
 import { CatalogComponent } from './view/components/catalog/catalog.component';
 import { NotfoundComponent } from './view/components/notfound/notfound.component';
+import { DescriptionArtComponent } from './view/arte/description-art/description-art.component';
+import { SearchResultsComponent } from './view/components/search-results/search-results.component';
 
 console.log(environment)
 
@@ -37,9 +38,10 @@ console.log(environment)
     ManageArtComponent,
     PublishArtComponent,
     EditArtComponent,
-    ArtDetailComponent,
     CatalogComponent,
     NotfoundComponent,
+    DescriptionArtComponent,
+    SearchResultsComponent,
   ],
   imports: [
     BrowserModule,

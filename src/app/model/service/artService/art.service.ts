@@ -41,13 +41,5 @@ export class ArtService {
 
   deleteArt(artistId: string, artId: string): Promise<void> {
     return this.firestore.collection('artistas').doc(artistId).collection('artes').doc(artId).delete();
-  }
-
-  searchArts(query: string): Observable<any[]> {
-    return this.firestore.collection('arts', ref => 
-      ref.where('title', '>=', query)
-         .where('title', '<=', query + '\uf8ff'))
-      .valueChanges();
-  }
-  
+  }  
 }

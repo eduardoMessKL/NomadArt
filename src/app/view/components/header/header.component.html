@@ -1,22 +1,12 @@
 <!--Header caso o usuário não esteja logado-->
 <div class="header-user-not-logged"> <!--If user not logged:-->
-    <div *ngIf="alertMessage" class="alert"> {{ alertMessage }} </div>
     <h1>Bem-vindo ao NomadArt!</h1>
-    <button (click)="navigateToSignup()" *ngIf="currentUserId == null">Cadastro</button>
-    <button (click)="navigateToSignin()" *ngIf="currentUserId == null">Login</button>
-    <button (click)="navigateToProfile()" *ngIf="currentUserId === userId">Perfil</button>
-    <button (click)="navigateToHome()" *ngIf="currentUserId === userId">Home</button>
-    <button (click)="navigateToPublish()" *ngIf="currentUserId === userId">Publicar</button>
+    <input type="text" placeholder="Pesquisar Artes" (input)="onSearch($event)">
+    <button (click)="navigateToSignup()" *ngIf="!isLoggedIn">Cadastro</button>
+    <button (click)="navigateToSignin()" *ngIf="!isLoggedIn">Login</button>
+    <button (click)="navigateToProfile()" *ngIf="isLoggedIn">Perfil</button>
+    <button (click)="navigateToHome()">Home</button>
+    <button (click)="navigateToPublish()" *ngIf="isLoggedIn">Publicar</button>
 </div>
 
 
-<!--Header caso o usuário ja esteja logado
-<div class="header-user-logged"> If user logged:
-    <div *ngIf="alertMessage" class="alert"> {{ alertMessage }} </div>
-    <h1>Bem-vindo ao NomadArt!</h1>
-    Barra de pesquisa AQUI
-    <button (click)="navigateToProfile()">Perfil</button>
-    <button (click)="navigateToPublish()">Postar</button>
-    <button (click)="navigateToFavorites()">Salvos</button>
-    <router-outlet></router-outlet>
-</div>-->

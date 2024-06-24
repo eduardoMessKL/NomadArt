@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AlertService } from 'src/app/common/alert.service';
+import { ArtService } from 'src/app/model/service/artService/art.service';
 import { AuthService } from 'src/app/model/service/authService/auth.service';
 
 @Component({
@@ -9,20 +10,19 @@ import { AuthService } from 'src/app/model/service/authService/auth.service';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
-  alertMessage: string = '';
-  userId: string | null = null;
-  currentUserId: string | null = null; 
+  isLoggedIn: boolean = false;
+  arts: any[] = [];
 
   constructor(
     private router: Router, 
-    private route: ActivatedRoute,
-    private alertService: AlertService, 
-    private authService: AuthService
+    private authService: AuthService,
+    private artService: ArtService,
   ) {}
 
-  async ngOnInit(): Promise<void> {
-    this.userId = this.route.snapshot.paramMap.get('id');
-    this.currentUserId = await this.authService.getCurrentUserId();
+  async ngOnInit(){
+    this.authService.isLoggedIn().subscribe(loggedIn =>{
+      this.isLoggedIn = loggedIn;
+    })
   }
 
   async navigateToSignup(): Promise<void> {
@@ -62,6 +62,21 @@ export class HeaderComponent implements OnInit {
   }
 
   navigateToHome(){
-    this.router.navigate(['/art-catalog'])
+    this.router.navigate(['/catalog'])
+  }
+
+  onSearch(event: Event) {
+    const inputElement = event.target as HTMLInputElement;
+    const query = inputElement.value.trim();
+
+    if (query) {
+      this.artService.searchArts(query).subscribe(arts => {
+        console.log('Found arts:', arts); // Log das artes encontradas
+        this.arts = arts;
+        this.router.navigate(['/search-results'], { state: { arts: this.arts } });
+      });
+    } else {
+      this.router.navigate(['/search-results'], { state: { arts: [] } });
+    }
   }
 }

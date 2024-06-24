@@ -1,17 +1,18 @@
-  <h2>Editar Arte</h2>
-  <button (click)="backToManage()">Voltar</button>
-  
+<!-- edit-art.component.html -->
+<div class="edit-art-container">
   <form (ngSubmit)="onSubmit()">
-    <label for="title">Título</label>
-    <input id="title" [(ngModel)]="art.title" name="title" required>
-    
-    <label for="description">Descrição</label>
-    <textarea id="description" [(ngModel)]="art.description" name="description" required></textarea>
-    
-    <label for="file">Imagem</label>
-    <input type="file" id="file" (change)="onFileSelected($event)">
-    
-    <button type="submit">Salvar</button>
+    <input type="text" [(ngModel)]="art.title" name="title" placeholder="Título" required>
+    <textarea [(ngModel)]="art.description" name="description" placeholder="Descrição" required></textarea>
+    <img [src]="art.imageUrl" alt="{{ art.title }}">
+    <input type="file" (change)="onFileSelected($event)">
+    <select [(ngModel)]="art.technique" name="technique" required>
+      <option value="" disabled>Escolha a técnica</option>
+      <option value="Óleo" [selected]="art.technique === 'Óleo'">Óleo</option>
+      <option value="Acrílica" [selected]="art.technique === 'Acrílica'">Acrílico</option>
+      <option value="Aquarela" [selected]="art.technique === 'Aquarela'">Aquarela</option>
+      <option value="Digital" [selected]="art.technique === 'Digital'">Digital</option>
+      <option value="Outra" [selected]="art.technique === 'Outra'">Outra</option>
+    </select>
+    <button type="submit">Concluir</button>
   </form>
-  <button (click)=deleteArt()>Excluir Arte</button>
-
+</div>

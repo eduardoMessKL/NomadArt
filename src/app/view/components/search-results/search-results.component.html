@@ -1,0 +1,8 @@
+<div>
+    <h2>Resultados da pesquisa</h2>
+    <div *ngIf="!arts.length">Nenhuma arte encontrada.</div>
+    <div *ngFor="let art of arts">
+        <img [src]="art.imageUrl" alt="{{ art.title }}">
+        <h3>{{ art.title }}</h3>
+    </div>
+</div>

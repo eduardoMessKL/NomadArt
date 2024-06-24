@@ -2,8 +2,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
-import { BehaviorSubject, Observable } from 'rxjs';
-import { User } from 'firebase/auth'; // Importe o tipo User correto para a sua versão do Firebase
+import { BehaviorSubject, Observable, map } from 'rxjs';
 
 
 @Injectable({
@@ -56,4 +55,10 @@ export class AuthService {
     const user = await this.fireAuth.currentUser;
     return user ? user.uid : null;
   }  
+
+  isLoggedIn(): Observable<boolean>{
+    return this.fireAuth.authState.pipe(
+      map(user => !!user)
+    )
+  }
 }

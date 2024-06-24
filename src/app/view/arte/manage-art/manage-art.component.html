@@ -1,16 +1,15 @@
-  <h2>Gerenciamento de Arte</h2>
+<!-- manage-art.component.html -->
+<div class="manage-art-container">
   <button (click)="publishArt()">Publicar Arte</button>
-  <button (click)="backToProfile()">Voltar ao perfil</button>
-
-  <div *ngIf="!artworks || artworks.length === 0">
-    <p>Você ainda não publicou nenhuma arte.</p>
-  </div>
-
-  <div *ngIf="artworks && artworks.length > 0">
-    <div *ngFor="let artwork of artworks">
-      <img [src]="artwork.imageUrl" alt="Art Image" />
-      <p>{{ artwork.title }}</p>
-      <p>{{ artwork.description }}</p>
-      <button (click)="editArtwork(artwork.id)">Editar</button>
+  <div *ngIf="arts.length > 0; else noArt">
+    <div *ngFor="let art of arts" class="art-item">
+      <h3>{{ art.title }}</h3>
+      <img [src]="art.imageUrl" alt="{{ art.title }}">
+      <button (click)="editArt(art.id)">Editar</button>
+      <button (click)="deleteArt(art.id)">Apagar</button>
     </div>
   </div>
+  <ng-template #noArt>
+    <p>Você não possui nenhuma arte publicada.</p>
+  </ng-template>
+</div>

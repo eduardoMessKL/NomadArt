@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ArtService } from 'src/app/model/service/artService/art.service';
-import { AuthService } from 'src/app/model/service/authService/auth.service';
 
 @Component({
   selector: 'app-manage-art',
@@ -10,27 +9,19 @@ import { AuthService } from 'src/app/model/service/authService/auth.service';
 })
 export class ManageArtComponent implements OnInit {
   artistId: string;
-  artworks: any[] = [];
-  currentUserId: string | null = null;
-  isOwner: boolean = false;
+  arts: any[] = [];
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private artService: ArtService,
-    private authService: AuthService
+    private artService: ArtService
   ) {
     this.artistId = this.route.snapshot.paramMap.get('id')!;
   }
 
-  async ngOnInit() {
-    console.log('Usuário logado: ', this.authService.getCurrentUserId())
-    this.loadArtworks();
-  }
-
-  loadArtworks() {
-    this.artService.getArtworksByArtist(this.artistId).subscribe(artworks => {
-      this.artworks = artworks;
+  ngOnInit() {
+    this.artService.getArts(this.artistId).subscribe(arts => {
+      this.arts = arts;
     });
   }
 
@@ -38,11 +29,15 @@ export class ManageArtComponent implements OnInit {
     this.router.navigate([`/profile/${this.artistId}/publish-art`]);
   }
 
-  editArtwork(artworkId: string) {
-    this.router.navigate([`/profile/${this.artistId}/edit-art/${artworkId}`]);
+  editArt(artId: string) {
+    this.router.navigate([`/profile/${this.artistId}/edit-art/${artId}`]);
   }
 
-  backToProfile(){
-    this.router.navigate([`/profile/${this.artistId}`])
+  deleteArt(artId: string) {
+    if (confirm('Tem certeza que deseja deletar esta arte?')) {
+      this.artService.deleteArt(this.artistId, artId).then(() => {
+        this.arts = this.arts.filter(art => art.id !== artId);
+      });
+    }
   }
 }

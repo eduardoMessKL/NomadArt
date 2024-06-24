@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -9,35 +10,44 @@ export class ArtService {
 
   constructor(private firestore: AngularFirestore) { }
 
-  // Adicionar arte
-  addArt(artistId: string, art: any) {
-    const artCollection = this.firestore.collection(`artistas/${artistId}/artes`);
-    return artCollection.add(art);
+  getAllArts(): Observable<any[]> {
+    return this.firestore.collectionGroup('artes').snapshotChanges().pipe(
+      map(actions => actions.map(a => {
+        const data = a.payload.doc.data() as any;
+        const id = a.payload.doc.id;
+        const artistId = a.payload.doc.ref.parent.parent?.id;
+        return { id, ...data, artistId };
+      }))
+    );
   }
 
-  // Obter todas as artes de um artista
-  getArtworksByArtist(artistId: string): Observable<any[]> {
-    const artCollection = this.firestore.collection(`artistas/${artistId}/artes`);
-    return artCollection.valueChanges({ idField: 'id' });
+  getArt(artistId: string, artId: string): Observable<any> {
+    return this.firestore.collection('artistas').doc(artistId).collection('artes').doc(artId).valueChanges();
   }
 
-  // Obter uma arte específica
-  getArtById(artistId: string, artId: string): Observable<any> {
-    return this.firestore.doc(`artistas/${artistId}/artes/${artId}`).valueChanges();
+  getArts(artistId: string): Observable<any[]> {
+    return this.firestore.collection(`artistas/${artistId}/artes`).valueChanges({ idField: 'id' });
   }
 
-  // Atualizar arte
-  updateArt(artistId: string, artId: string, art: any) {
-    return this.firestore.doc(`artistas/${artistId}/artes/${artId}`).update(art);
+
+  addArt(artistId: string, art: any): Promise<void> {
+    const id = this.firestore.createId();
+    return this.firestore.collection('artistas').doc(artistId).collection('artes').doc(id).set(art);
   }
 
-  // Deletar arte
-  deleteArt(artistId: string, artId: string) {
-    return this.firestore.doc(`artistas/${artistId}/artes/${artId}`).delete();
+  updateArt(artistId: string, artId: string, art: any): Promise<void> {
+    return this.firestore.collection('artistas').doc(artistId).collection('artes').doc(artId).update(art);
   }
 
-  // Obter todas as artes publicadas por todos os artistas
-  getAllArtworks(): Observable<any[]> {
-    return this.firestore.collectionGroup('artes').valueChanges({ idField: 'id' });
+  deleteArt(artistId: string, artId: string): Promise<void> {
+    return this.firestore.collection('artistas').doc(artistId).collection('artes').doc(artId).delete();
   }
+
+  searchArts(query: string): Observable<any[]> {
+    return this.firestore.collection('arts', ref => 
+      ref.where('title', '>=', query)
+         .where('title', '<=', query + '\uf8ff'))
+      .valueChanges();
+  }
+  
 }

@@ -11,12 +11,10 @@ import { AuthService } from 'src/app/model/service/authService/auth.service';
 })
 export class HeaderComponent implements OnInit {
   isLoggedIn: boolean = false;
-  arts: any[] = [];
 
   constructor(
     private router: Router, 
     private authService: AuthService,
-    private artService: ArtService,
   ) {}
 
   async ngOnInit(){
@@ -63,20 +61,5 @@ export class HeaderComponent implements OnInit {
 
   navigateToHome(){
     this.router.navigate(['/catalog'])
-  }
-
-  onSearch(event: Event) {
-    const inputElement = event.target as HTMLInputElement;
-    const query = inputElement.value.trim();
-
-    if (query) {
-      this.artService.searchArts(query).subscribe(arts => {
-        console.log('Found arts:', arts); // Log das artes encontradas
-        this.arts = arts;
-        this.router.navigate(['/search-results'], { state: { arts: this.arts } });
-      });
-    } else {
-      this.router.navigate(['/search-results'], { state: { arts: [] } });
-    }
   }
 }

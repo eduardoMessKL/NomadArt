@@ -1,7 +1,5 @@
-<!--Header caso o usuário não esteja logado-->
-<div class="header-user-not-logged"> <!--If user not logged:-->
+<div class="header"> 
     <h1>Bem-vindo ao NomadArt!</h1>
-    <input type="text" placeholder="Pesquisar Artes" (input)="onSearch($event)">
     <button (click)="navigateToSignup()" *ngIf="!isLoggedIn">Cadastro</button>
     <button (click)="navigateToSignin()" *ngIf="!isLoggedIn">Login</button>
     <button (click)="navigateToProfile()" *ngIf="isLoggedIn">Perfil</button>

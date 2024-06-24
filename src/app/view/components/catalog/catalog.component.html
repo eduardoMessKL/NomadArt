@@ -1,9 +1,10 @@
-<!-- catalog.component.html -->
 <div class="catalog-container">
   <select (change)="filterArts($event)">
     <option value="">Todas as Técnicas</option>
     <option *ngFor="let technique of techniques" [value]="technique">{{ technique }}</option>
   </select>
+  
+  <input type="text" placeholder="Buscar pelo título..." (input)="onSearchChange($event)">
 
   <div *ngIf="selectedTechnique">
     <h2>{{ techniqueDetails[selectedTechnique].text }}</h2>

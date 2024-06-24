@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { ArtService } from 'src/app/model/service/artService/art.service';
-import { AuthService } from 'src/app/model/service/authService/auth.service';
 
 @Component({
   selector: 'app-catalog',
@@ -13,6 +12,7 @@ export class CatalogComponent implements OnInit {
   filteredArts: any[] = [];
   techniques: string[] = ['Óleo', 'Aquarela', 'Digital', 'Acrílica', 'Outra'];
   selectedTechnique: string = '';
+  searchText: string = '';
 
   techniqueDetails: {[key: string]: {text: string, imageUrl: string}} = {
     'Óleo': {
@@ -53,18 +53,29 @@ export class CatalogComponent implements OnInit {
   }
 
   filterArts(event: Event) {
-    const selectElement = event.target as HTMLSelectElement;
-    const technique = selectElement.value;
-    this.selectedTechnique =  technique;
-
-    if (technique) {
-      this.filteredArts = this.arts.filter(art => art.technique === technique);
-    } else {
-      this.filteredArts = this.arts;
-    }
+    const target = event.target as HTMLSelectElement;
+    this.selectedTechnique = target.value;
+    this.applyFilters();
   }
 
-  viewArt(art:any) {
+  onSearchChange(event: Event) {
+    const target = event.target as HTMLInputElement;
+    this.searchText = target.value;
+    this.applyFilters();
+  }
+
+  applyFilters() {
+    let arts = this.arts;
+    if (this.selectedTechnique) {
+      arts = arts.filter(art => art.technique === this.selectedTechnique);
+    }
+    if (this.searchText) {
+      arts = arts.filter(art => art.title.toLowerCase().includes(this.searchText.toLowerCase()));
+    }
+    this.filteredArts = arts;
+  }
+
+  viewArt(art: any) {
     this.router.navigate([`/description-art/${art.artistId}/${art.id}`]);
   }
 }

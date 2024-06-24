@@ -13,11 +13,19 @@
     </ul>
     <img *ngIf="artist.profileImageUrl" [src]="artist.profileImageUrl" alt="Foto do perfil">
 
-    <div *ngIf="currentUserId === userId">
+    <div *ngIf="currentUserId === artistId">
       <button (click)="logout()">Logout</button>
       <button (click)="deleteProfile()">Deletar Perfil</button>
       <button (click)="updateProfile()">Editar Perfil</button>
       <button (click)="manageArt()">Gerenciar Arte</button>
+    </div>
+
+    <h2>Artes de {{ artist.name }}</h2>
+    <div *ngIf="arts.length >0">
+      <div *ngFor="let art of arts" (click)="viewArt(art)">
+        <img [src]="art.imageUrl" alt="{{ art.title }}">
+        <h3>{{ art.title }}</h3>
+      </div>
     </div>
   </div>
   

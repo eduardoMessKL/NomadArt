@@ -1,0 +1,25 @@
+<!-- description-art.component.html -->
+<div class="description-art-container">
+    <h2>{{ art.title }}</h2>
+    <img [src]="art.imageUrl" alt="{{ art.title }}">
+    <p>{{ art.description }}</p>
+    <p>Técnica: {{ art.technique }}</p>
+
+  <div>
+    <h2>Artista:</h2>
+    <h3>{{ artistProfile.name }}</h3>
+    <img [src]="artistProfile.profileImageUrl" alt="{{ artistProfile.name }}">
+    <p>quem sou eu? <br>{{ artistProfile.profileDescription }}</p>
+    <button (click)="viewArtistProfile()">Ver Perfil do Artista</button>
+  </div>
+
+  <h2>Outras artes de {{ artistProfile.name }}</h2>
+  <div *ngIf="otherArts.length > 0">
+    <div *ngFor="let arte of otherArts.slice(1, 4)">
+      <div>{{ arte.title }}</div>
+      <img [src]="arte.imageUrl" alt="{{ arte.title }}">
+    </div>
+    <button (click)="viewArtistProfile()">Ver mais</button>
+  </div>
+</div>
+  

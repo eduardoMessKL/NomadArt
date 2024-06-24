@@ -1,5 +1,22 @@
-<h2>Galeria de Artes</h2>
-<div *ngFor="let artwork of artworks" (click)="viewArtwork(artwork.artistId, artwork.id)">
-  <img [src]="artwork.imageUrl" alt="Art Image" />
-  <p>{{ artwork.title }}</p>
+<!-- catalog.component.html -->
+<div class="catalog-container">
+  <select (change)="filterArts($event)">
+    <option value="">Todas as Técnicas</option>
+    <option *ngFor="let technique of techniques" [value]="technique">{{ technique }}</option>
+  </select>
+
+  <div *ngIf="selectedTechnique">
+    <h2>{{ techniqueDetails[selectedTechnique].text }}</h2>
+    <img [src]="techniqueDetails[selectedTechnique].imageUrl" alt="{{ selectedTechnique }}">
+  </div>
+
+  <div *ngIf="!filteredArts.length">
+    <p>Nenhuma arte encontrada.</p>
+  </div>
+
+  <div *ngFor="let art of filteredArts" class="art-item" (click)="viewArt(art)">
+    <h3>{{ art.title }}</h3>
+    <img [src]="art.imageUrl" alt="{{ art.title }}">
+    <p>Clique para saber mais</p>
+  </div>
 </div>

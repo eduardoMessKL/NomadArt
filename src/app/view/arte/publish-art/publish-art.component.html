@@ -1,29 +1,17 @@
-  <h2>Publicar Arte</h2>
+<!-- publish-art.component.html -->
+<div class="publish-art-container">
   <form (ngSubmit)="onSubmit()">
-    <label for="title">Título</label>
-    <input id="title" [(ngModel)]="art.title" name="title" required>
-    
-    <label for="description">Descrição</label>
-    <textarea id="description" [(ngModel)]="art.description" name="description" required></textarea>
-    
-    <label for="file">Imagem</label>
-    <input type="file" id="file" (change)="onFileSelected($event)">
-    
-    <label>
-      <input type="checkbox" [(ngModel)]="art.technique.oil" name="techniques.oil"> Óleo
-    </label>
-    <label>
-      <input type="checkbox" [(ngModel)]="art.technique.acrylic" name="techniques.acrylic"> Acrílico
-    </label>
-    <label>
-      <input type="checkbox" [(ngModel)]="art.technique.watercolor" name="techniques.watercolor"> Aquarela
-    </label>
-    <label>
-      <input type="checkbox" [(ngModel)]="art.technique.digital" name="techniques.digital"> Digital
-    </label>
-    <label>
-      <input type="checkbox" [(ngModel)]="art.technique.other" name="techniques.other"> Outra
-    </label>
-
-    <button type="submit">Publicar Arte</button>
+    <input type="text" [(ngModel)]="art.title" name="title" placeholder="Título" required>
+    <textarea [(ngModel)]="art.description" name="description" placeholder="Descrição" required></textarea>
+    <input type="file" (change)="onFileSelected($event)" required>
+    <select [(ngModel)]="art.technique" name="technique" required>
+      <option value="" disabled selected>Escolha a técnica</option>
+      <option value="Óleo">Óleo</option>
+      <option value="Acrílica">Acrílico</option>
+      <option value="Aquarela">Aquarela</option>
+      <option value="Digital">Digital</option>
+      <option value="Outra">Outra</option>
+    </select>
+    <button type="submit">Publicar</button>
   </form>
+</div>

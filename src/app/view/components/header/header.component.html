@@ -1,10 +1,14 @@
 <div class="header"> 
-    <h1>Bem-vindo ao NomadArt!</h1>
-    <button (click)="navigateToSignup()" *ngIf="!isLoggedIn">Cadastro</button>
-    <button (click)="navigateToSignin()" *ngIf="!isLoggedIn">Login</button>
-    <button (click)="navigateToProfile()" *ngIf="isLoggedIn">Perfil</button>
-    <button (click)="navigateToHome()">Home</button>
-    <button (click)="navigateToPublish()" *ngIf="isLoggedIn">Publicar</button>
+    <h1 (click)="navigateToHome()">NomadArt</h1>
+    <nav class="nav-header">
+        <a (click)="navigateToHome()">Home</a>
+        <a (click)="navigateToSignup()" *ngIf="!isLoggedIn">Cadastro</a>
+        <a (click)="navigateToSignin()" *ngIf="!isLoggedIn">Login</a>
+        <a (click)="navigateToPublish()" *ngIf="isLoggedIn">Publicar</a>
+        <a (click)="navigateToProfile()" *ngIf="isLoggedIn">Perfil</a>
+        <img (click)="navigateToSignin()" src="assets/user-icon.png" *ngIf="!isLoggedIn">
+        <img (click)="navigateToProfile()" src="assets/user-icon.png" *ngIf="isLoggedIn">
+    </nav>
 </div>
 
 

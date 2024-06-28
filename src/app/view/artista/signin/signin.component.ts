@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../../../model/service/authService/auth.service';
 import { AlertService } from 'src/app/common/alert.service';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-signin',
@@ -16,7 +17,7 @@ export class SigninComponent {
   constructor(
     private router: Router,
     private authService: AuthService,
-    private alertService: AlertService
+    private spinner: NgxSpinnerService
   ) { }
 
   onSubmit() {
@@ -26,14 +27,22 @@ export class SigninComponent {
     }
 
     this.authService.login(this.email, this.password)
-      .then(res => {
-        if (res.user) {
-          this.router.navigate([`/profile/${res.user.uid}`]);
-        }
-      })
-      .catch(error => {
-        console.error('Login failed', error);
-        this.errorMessage = 'Falha no login. Verifique suas credenciais e tente novamente.';
-      });
+    .then(res => {
+      if (res.user) {
+        this.router.navigate([`/profile/${res.user.uid}`]);
+      }
+    })
+    
+      this.spinner.show();
+      setTimeout(()=>{  
+        this.spinner.hide()  
+      }, 3000)
+  }
+
+  navigateToAjuda(){
+    this.router.navigate([`/help`])
+  }
+  navigateToCatalog(){
+    this.router.navigate(['/catalog'])
   }
 }

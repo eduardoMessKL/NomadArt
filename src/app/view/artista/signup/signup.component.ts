@@ -4,6 +4,7 @@ import { AuthService } from '../../../model/service/authService/auth.service';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { finalize } from 'rxjs/operators';
 import { AlertService } from 'src/app/common/alert.service';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-signup',
@@ -33,7 +34,8 @@ export class SignupComponent {
     private authService: AuthService,
     private storage: AngularFireStorage,
     private alertService: AlertService,
-    private router: Router
+    private router: Router,
+    private spinner: NgxSpinnerService
   ) { }
 
   onFileSelected(event: any) {
@@ -56,14 +58,14 @@ export class SignupComponent {
       return;
     }
 
-    if (this.artist.profileDescription.length > 200) {
-      this.errorMessage = 'Máximo de caracteres para a descrição é de 200 elementos!';
+    if (this.artist.profileDescription.length > 500) {
+      this.errorMessage = 'Máximo de caracteres para a descrição é de 500 elementos!';
       return;
     }
 
     this.authService.register(this.artist.email, this.artist.password)
       .then(res => {
-        const userId = res.user?.uid; // Pega o UID do usuário
+        const userId = res.user?.uid;
         if (userId) {
           if (this.selectedFile) {
             const filePath = `profile_images/${userId}`;
@@ -82,10 +84,10 @@ export class SignupComponent {
           }
         }
       })
-      .catch(error => {
-        console.error('Error registering artist', error);
-        this.errorMessage = this.getErrorMessage(error);
-      });
+      this.spinner.show();
+      setTimeout(()=>{  
+        this.spinner.hide()  
+      }, 3000)
   }
 
   saveArtistProfile(artistId: string, profileImageUrl: string | null) {

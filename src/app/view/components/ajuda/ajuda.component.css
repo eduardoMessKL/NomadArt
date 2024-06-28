@@ -1,0 +1,56 @@
+.ajuda-container{
+    height: 80vh;
+    width: 100vw;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .card-ajuda{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-around;
+        padding: 1rem;
+
+        height: 85%;
+        width: 35%;
+        background-color: #2A354B;
+        box-shadow: 0px 0px 10px rgb(0, 0, 0);
+
+        color: white;
+
+        border-radius: 5px;
+
+        .line{
+            border-bottom-style: solid;
+            border-color: white;
+            border-width: 2px;
+            width: 80%;
+            margin-bottom: 1rem;
+        }
+
+        .voltar{
+            width: 90%;
+            height: 3%;
+            display: flex;
+            align-items: start;
+        }
+        .voltar:hover{
+            cursor: pointer;
+        }
+
+        h1, h3, p{
+            padding: 0.5rem;
+        }
+        h1{
+            font-size: 40px;
+        }
+        h3{
+            font-size: 25px;
+        }
+        p{
+            font-size: 20px;
+        }
+    }
+}

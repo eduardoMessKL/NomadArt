@@ -31,7 +31,11 @@ export class SigninComponent {
       if (res.user) {
         this.router.navigate([`/profile/${res.user.uid}`]);
       }
-    })
+    })      
+    .catch(error => {
+      console.error('Login failed', error);
+      this.errorMessage = 'Falha no login. Verifique suas credenciais e tente novamente.';
+    });
     
       this.spinner.show();
       setTimeout(()=>{  

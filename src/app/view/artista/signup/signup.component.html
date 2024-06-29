@@ -9,13 +9,13 @@
 
 <form (ngSubmit)="onSubmit()" #signupForm="ngForm">
     <a href="/catalog">Voltar</a>
-    <div class="left">
-      <h1>NomadArt</h1>
+    <div class="left-side">
+    <h1>Cadastro</h1>
       <p>Registre-se e faça parte da melhor galeria virtual!</p>
-      <img src="assets/profile-icon.png" >
+      <img [src]="selectedImageUrl" >
+      <label for="input-file">Escolher Foto</label>
       <div class="inputs">
-        <input type="file" (change)="onFileSelected($event)" class="file">
-
+        <input type="file" (change)="onFileSelected($event)" id="input-file" accept="image/png, image/jpeg, image/jpg" hidden>
         <input type="text" [(ngModel)]="artist.name" name="name" placeholder="Nome *" required>
         <input type="email" [(ngModel)]="artist.email" name="email" placeholder="Email *" required>
         <input type="password" [(ngModel)]="artist.password" name="password" placeholder="Senha *" required>
@@ -23,7 +23,7 @@
       </div>
       </div>
 
-    <div class="right">
+    <div class="right-side">
       <h1>Criar Perfil</h1>
       <textarea [(ngModel)]="artist.profileDescription" name="profileDescription" cols="80" rows="10" placeholder="Descrição do perfil" maxlength="500" required></textarea>
       <input type="text" [(ngModel)]="artist.country" name="country" placeholder="País de origem" maxlength="30" required>

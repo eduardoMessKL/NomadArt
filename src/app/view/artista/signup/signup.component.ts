@@ -28,6 +28,7 @@ export class SignupComponent {
     }
   };
   selectedFile: File | null = null;
+  selectedImageUrl: string | ArrayBuffer | null =  '/assets/profile-icon.png'
   errorMessage: string = '';
 
   constructor(
@@ -39,7 +40,19 @@ export class SignupComponent {
   ) { }
 
   onFileSelected(event: any) {
-    this.selectedFile = event.target.files[0];
+    const file = event.target.files[0];
+    this.selectedFile = file;
+
+    if(file){
+      const reader = new FileReader();
+      reader.onload = (e) =>{
+        const result = e.target?.result;
+        if(result !== undefined){
+          this.selectedImageUrl = result;
+        }
+      };
+      reader.readAsDataURL(file);
+    }
   }
 
   onSubmit() {
@@ -84,6 +97,10 @@ export class SignupComponent {
           }
         }
       })
+      .catch(error => {
+        console.error('Error registering artist', error);
+        this.errorMessage = this.getErrorMessage(error);
+      });
       this.spinner.show();
       setTimeout(()=>{  
         this.spinner.hide()  
@@ -93,6 +110,7 @@ export class SignupComponent {
   saveArtistProfile(artistId: string, profileImageUrl: string | null) {
     const artistProfile = {
       name: this.artist.name,
+      email: this.artist.email,
       profileDescription: this.artist.profileDescription,
       country: this.artist.country,
       techniques: this.artist.techniques,

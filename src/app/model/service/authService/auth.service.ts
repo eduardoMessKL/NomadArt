@@ -43,7 +43,21 @@ export class AuthService {
   
   // Deletar perfil do artista
   deleteArtistProfile(userId: string): Promise<void> {
-    return this.firestore.collection('artistas').doc(userId).delete();
+    return this.firestore.collection('artistas').doc(userId).delete().then(()=>{
+      return this.deleteUser();
+    });
+  }
+
+  async deleteUser(): Promise<void> {
+    const user = await this.fireAuth.currentUser;
+
+  if(user){
+    return user.delete().then(()=>{
+
+    })
+  } else{
+    return Promise.reject();
+  } 
   }
 
   // Atualizar perfil do artista

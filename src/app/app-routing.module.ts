@@ -11,10 +11,12 @@ import { CatalogComponent } from './view/components/catalog/catalog.component';
 import { NotfoundComponent } from './view/components/notfound/notfound.component';
 import { DescriptionArtComponent } from './view/arte/description-art/description-art.component';
 import { AuthGuard } from './common/guard/auth.guard';
+import { AjudaComponent } from './view/components/ajuda/ajuda.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/catalog', pathMatch: 'full'},
   { path: 'notfound', component: NotfoundComponent},
+  { path: 'help', component: AjudaComponent },
   { path: 'signup', component: SignupComponent},
   { path: 'signin', component: SigninComponent},
   { path: 'profile/:id', component: ProfileComponent },

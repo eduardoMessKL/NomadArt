@@ -22,10 +22,19 @@ import { EditArtComponent } from './view/arte/edit-art/edit-art.component';
 import { CatalogComponent } from './view/components/catalog/catalog.component';
 import { NotfoundComponent } from './view/components/notfound/notfound.component';
 import { DescriptionArtComponent } from './view/arte/description-art/description-art.component';
+import { AjudaComponent } from './view/components/ajuda/ajuda.component';
+import { RouterModule, Routes } from '@angular/router';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NgxSpinnerModule } from 'ngx-spinner';
 
 console.log(environment)
 
+const routes: Routes = [ 
+  { path: '', component: AppComponent }, 
+]; 
+
 @NgModule({
+
   declarations: [
     AppComponent,
     SignupComponent,
@@ -40,17 +49,23 @@ console.log(environment)
     CatalogComponent,
     NotfoundComponent,
     DescriptionArtComponent,
+    AjudaComponent,
   ],
   imports: [
     BrowserModule,
+    RouterModule.forRoot(routes, {scrollPositionRestoration: 'enabled'}),
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireAuthModule,
     AngularFirestoreModule,
     AngularFireStorageModule,
-    FormsModule
+    FormsModule,
+    BrowserAnimationsModule,
+    NgxSpinnerModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule { 
+
+}

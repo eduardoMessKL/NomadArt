@@ -55,7 +55,7 @@ export class CatalogComponent implements OnInit {
 
   ngOnInit() {
     this.artService.getAllArts().subscribe(arts => {
-      this.arts = arts;
+      this.arts = this.shuffleArray(arts);
       this.filteredArts = arts;
     });
 
@@ -100,4 +100,18 @@ export class CatalogComponent implements OnInit {
       console.error('User not logged in');
     }
   }
+
+  navigateToGallery(){
+    this.router.navigate([`/gallery`])
+    console.log('te amo vitória')
+  }
+
+  shuffleArray(array: any[]): any[] {
+    for (let i = array.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array;
+  }
+  
 }

@@ -6,7 +6,10 @@
         <h1>O que é o NomadArt?</h1>
         <p>Uma galeria virtual voltada para exposição de pinturas confeccionadas por artistas amadores!</p>
       </div>
-      <button (click)="navigateToPublish()">Quero expôr minha arte <img src="assets/add-icon.png"></button>
+      <div class="btn">
+        <button (click)="navigateToPublish()">Quero expor minha arte<img src="assets/add-icon.png"></button>
+        <button (click)="navigateToGallery()">Visualizar galeria<img src="assets/search-icon-white.png" class="lupa"></button>
+      </div>
     </section>
     <img src="assets/galery.jpg">
   </div>
@@ -18,7 +21,10 @@
         <h1 *ngIf="selectedTechnique === 'Outra'">Descubra outras Técnicas de pintura!</h1>
         <p>{{ techniqueDetails[selectedTechnique].text }}</p>
       </div>
-      <button (click)="navigateToPublish()">Quero expôr minha arte <img src="assets/add-icon.png"></button>
+      <div class="btn">
+        <button (click)="navigateToPublish()">Quero expor minha arte<img src="assets/add-icon.png"></button>
+        <button (click)="navigateToGallery()">Visualizar galeria<img src="assets/search-icon-white.png" class="lupa"></button>
+      </div>
       </section>
     <img [src]="techniqueDetails[selectedTechnique].imageUrl" alt="{{ selectedTechnique }}">
   </div>
@@ -30,21 +36,16 @@
       <option *ngFor="let technique of techniques" [value]="technique">{{ technique }}</option>
     </select>
   </div>
-  
-  <div class="search-bar">
-    <input type="text" placeholder="Pesquise por títulos de artes" (input)="onSearchChange($event)">
-    <img src="assets/search-icon.png" class="search-icon">
-  </div>
 
   <p class="line"></p>
   <h1 class="destaques">Artes em destaque: {{selectedTechnique}}</h1>
 
   <div *ngIf="!filteredArts.length" class="none">
     <p>Nenhuma arte encontrada.</p>
-  </div>
+  </div>  
 
   <div class="art-container">
-    <div *ngFor="let art of filteredArts" class="art-item" (click)="viewArt(art)">
+    <div *ngFor="let art of filteredArts.slice(0, 6)" class="art-item" (click)="viewArt(art)">
       <img [src]="art.imageUrl" alt="{{ art.title }}">
       <div class="title-mais">
         <h3>{{ art.title }}</h3>
@@ -52,4 +53,5 @@
       </div>
     </div>
   </div>
+  <button (click)="navigateToGallery()" class="btn-vermais">Ver mais artes</button>
 </div>

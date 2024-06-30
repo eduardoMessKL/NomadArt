@@ -1,0 +1,31 @@
+<div class="gallery-container">
+    <h1 class="destaques">Galeria NomadArt</h1>
+
+    <div class="filter-container">
+        <h2>Filtre pela sua técnica de pintura favorita!</h2>
+        <select (change)="filterArts($event)">
+          <option value="">Todas as Técnicas</option>
+          <option *ngFor="let technique of techniques" [value]="technique">{{ technique }}</option>
+        </select>
+      </div>
+      
+      <div class="search-bar">
+        <input type="text" placeholder="Pesquise por títulos de artes" (input)="onSearchChange($event)">
+        <img src="assets/search-icon.png" class="search-icon">
+      </div>
+
+    <div *ngIf="!filteredArts.length" class="none">
+    <p>Nenhuma arte encontrada.</p>
+    </div>
+
+    <h3>Você está filtrando por: {{ selectedTechnique }}</h3>
+    <div class="art-container">
+    <div *ngFor="let art of filteredArts" class="art-item" (click)="viewArt(art)">
+        <img [src]="art.imageUrl" alt="{{ art.title }}">
+        <div class="title-mais">
+        <h3>{{ art.title }}</h3>
+        <p>Clique para saber mais</p>
+        </div>
+    </div>
+    </div>
+</div>

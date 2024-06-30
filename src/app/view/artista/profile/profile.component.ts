@@ -31,8 +31,6 @@ export class ProfileComponent implements OnInit {
         this.artist = artist;
       });
     }
-    console.log('Usuáio Logado: ', this.authService.getCurrentUserId())
-
     this.artService.getArts(this.artistId).subscribe(arts =>{
       this.arts =  arts;
     })
@@ -46,21 +44,9 @@ export class ProfileComponent implements OnInit {
     }
   }
 
-  deleteProfile(): void {
-    if (confirm('Você tem certeza que quer deletar o perfil?')) {
-      if (this.artistId) {
-        this.authService.deleteArtistProfile(this.artistId).then(() => {
-          this.router.navigate(['/signin']);
-          console.log("Perfil excluído com sucesso!")
-        });
-      }
-    }
-  }
-
   updateProfile(): void {
     if (this.artistId) {
       this.router.navigate([`/profile/${this.artistId}/edit`]);
-      console.log("Perfil editado com sucesso!")
     }
   }
 
@@ -68,7 +54,15 @@ export class ProfileComponent implements OnInit {
     this.router.navigate([`/profile/${this.artistId}/manage-art`]);
   }
 
+  publishArt() {
+    this.router.navigate([`/profile/${this.artistId}/publish-art`]);
+  }
+
   viewArt(art:any){
     this.router.navigate([`/description-art/${this.artistId}/${art.id}`])
+  }
+
+  navigateToCatalog(){
+    this.router.navigate([`/catalog`])
   }
 }

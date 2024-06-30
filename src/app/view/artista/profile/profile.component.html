@@ -1,31 +1,66 @@
-<div *ngIf="artist">
-    <h1>{{ artist.name }}</h1>
-    <p>Email: {{ artist.email }}</p>
-    <p>Descrição: {{ artist.profileDescription }}</p>
-    <p>País: {{ artist.country }}</p>
-    <p>Técnicas:</p>
-    <ul>
-      <li *ngIf="artist.techniques.oil">Óleo</li>
-      <li *ngIf="artist.techniques.acrylic">Acrílico</li>
-      <li *ngIf="artist.techniques.watercolor">Aquarela</li>
-      <li *ngIf="artist.techniques.digital">Digital</li>
-      <li *ngIf="artist.techniques.other">Outra</li>
-    </ul>
-    <img *ngIf="artist.profileImageUrl" [src]="artist.profileImageUrl" alt="Foto do perfil">
+<div *ngIf="artist" class="profile-container">
+ <!--*ngIf="currentUserId === artistId" -->
+ <p (click)="navigateToCatalog()" class="voltar">Voltar</p>
+  <div *ngIf="currentUserId === artistId" class="buttons-profile">
+    <section class="banner-profile">
+      <h1>Meu perfil</h1>
+      <p>Aqui você encontra todas as suas informações pessoais e também consegue acessar o gerenciamento de suas obras!</p>
+    </section>
+    <div class="btn-profile">
+      <button (click)="manageArt()" class="gerenciar-art">Gerenciar Artes <img src="/assets/paint-palette-icon.png"></button>
+      <button (click)="publishArt()" class="btn-blue" >Publicar Arte <img src="/assets/add-icon-black.png"></button>
+      <button (click)="updateProfile()" class="btn-blue">Editar Perfil <img src="/assets/edit-icon.png"></button>
+      <button (click)="logout()" class="logout">Logout <img src="/assets/logout-icon.png"></button>
 
-    <div *ngIf="currentUserId === artistId">
-      <button (click)="logout()">Logout</button>
-      <button (click)="deleteProfile()">Deletar Perfil</button>
-      <button (click)="updateProfile()">Editar Perfil</button>
-      <button (click)="manageArt()">Gerenciar Arte</button>
-    </div>
-
-    <h2>Artes de {{ artist.name }}</h2>
-    <div *ngIf="arts.length >0">
-      <div *ngFor="let art of arts" (click)="viewArt(art)">
-        <img [src]="art.imageUrl" alt="{{ art.title }}">
-        <h3>{{ art.title }}</h3>
-      </div>
     </div>
   </div>
+
+  <section *ngIf="currentUserId != artistId" class="banner-profile">
+    <h1>Perfil de {{ artist.name }}</h1>
+    <p>Descubra mais sobre o(a) artista!</p>
+  </section>
+
+  <section class="infos-profile">
+    <div class="left-side-profile">
+      <img *ngIf="artist.profileImageUrl" [src]="artist.profileImageUrl">
+      <img *ngIf="!artist.profileImageUrl" src="/assets/user2-icon.png">
+      <h1>{{ artist.name }}</h1>
+      <p>País: {{ artist.country }}</p>
+    </div>
+    <div class="right-side-profile">
+      <h3>Quem sou eu?<br> <p>{{ artist.profileDescription }}</p></h3>
+      <h3>Técnicas Utilizadas:
+        <ul>
+          <li *ngIf="artist.techniques.oil">Óleo</li>
+          <li *ngIf="artist.techniques.acrylic">Acrílico</li>
+          <li *ngIf="artist.techniques.watercolor">Aquarela</li>
+          <li *ngIf="artist.techniques.digital">Digital</li>
+          <li *ngIf="artist.techniques.other">Outra</li>
+        </ul>
+      </h3>
+      <h3>Email para contato: <p>{{ artist.email }}</p></h3>
+    </div>
+  </section>
+</div>
+
+<section class="catalog-container">
+  <h1>Artes de {{ artist.name }}:</h1>
+  <div class="art-container" *ngIf="arts.length > 0" >
+    <div *ngFor="let art of arts" class="art-item" (click)="viewArt(art)" >
+        <img [src]="art.imageUrl" alt="{{ art.title }}">
+        <div class="title-mais">
+          <h3>{{ art.title }}</h3>
+          <p>Clique para saber mais</p>
+        </div>    
+    </div>
+  </div>
+
+  
+  <div class="arts-none" *ngIf="arts.length === 0">
+    <p>Nenhuma arte encontrada</p>
+    <img src="/assets/clear-search-icon.png" class="not-found">
+  </div>
+</section>
+
+
   

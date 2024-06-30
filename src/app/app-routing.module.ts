@@ -12,6 +12,7 @@ import { NotfoundComponent } from './view/components/notfound/notfound.component
 import { DescriptionArtComponent } from './view/arte/description-art/description-art.component';
 import { AuthGuard } from './common/guard/auth.guard';
 import { AjudaComponent } from './view/components/ajuda/ajuda.component';
+import { GalleryComponent } from './view/components/gallery/gallery.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/catalog', pathMatch: 'full'},
@@ -25,6 +26,7 @@ const routes: Routes = [
   { path: 'profile/:id/publish-art', component: PublishArtComponent, canActivate: [AuthGuard] },
   { path: 'profile/:id/edit-art/:artId', component: EditArtComponent, canActivate: [AuthGuard] },
   { path: 'catalog', component: CatalogComponent},
+  { path: 'gallery', component: GalleryComponent},
   { path: 'description-art/:artistId/:artId', component: DescriptionArtComponent },
 
 ];

@@ -26,6 +26,7 @@ import { AjudaComponent } from './view/components/ajuda/ajuda.component';
 import { RouterModule, Routes } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgxSpinnerModule } from 'ngx-spinner';
+import { GalleryComponent } from './view/components/gallery/gallery.component';
 
 console.log(environment)
 
@@ -50,6 +51,7 @@ const routes: Routes = [
     NotfoundComponent,
     DescriptionArtComponent,
     AjudaComponent,
+    GalleryComponent,
   ],
   imports: [
     BrowserModule,
@@ -62,6 +64,7 @@ const routes: Routes = [
     FormsModule,
     BrowserAnimationsModule,
     NgxSpinnerModule,
+    
   ],
   providers: [],
   bootstrap: [AppComponent]

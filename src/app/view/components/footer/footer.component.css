@@ -11,8 +11,12 @@
         right: 0px;
     
         padding: 5rem;
+
+        img{
+            height: 2rem;
+        }
     
-        h1, h3, h2, p{
+        h1, h3, h2, p, a{
             color: white;
         }
     }
@@ -32,11 +36,14 @@
 
         padding-top: 1.5rem;
         
-        h1, h3, h2, p{
-            opacity: 70%;
+        h1, h3, h2, p, a{
+            opacity: 80%;
             color: white;
-            font-size: 0.5rem;
+            font-size: 0.65rem;
             padding: 0.3rem;
+        }
+        img{
+            height: 1rem;
         }
     }
 }

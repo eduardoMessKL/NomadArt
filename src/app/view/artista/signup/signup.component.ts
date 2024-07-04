@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../../../model/service/authService/auth.service';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
@@ -11,7 +11,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
   templateUrl: './signup.component.html',
   styleUrls: ['./signup.component.css']
 })
-export class SignupComponent {
+export class SignupComponent implements OnInit{
   artist: any = {
     name: '',
     email: '',
@@ -31,6 +31,7 @@ export class SignupComponent {
   selectedFile: File | null = null;
   selectedImageUrl: string | ArrayBuffer | null =  '/assets/profile-icon.png'
   errorMessage: string = '';
+  isLoggedIn: boolean = false;
 
   constructor(
     private authService: AuthService,
@@ -39,6 +40,12 @@ export class SignupComponent {
     private router: Router,
     private spinner: NgxSpinnerService
   ) { }
+
+  ngOnInit(){
+    this.authService.isLoggedIn().subscribe(loggedIn =>{
+      this.isLoggedIn = loggedIn;
+    })
+  }
 
   onFileSelected(event: any) {
     const file = event.target.files[0];

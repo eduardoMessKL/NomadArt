@@ -7,7 +7,7 @@
   <p style="font-size: 20px; color: white">Loading...</p>
 </ngx-spinner>
 
-<form (ngSubmit)="onSubmit()" #signupForm="ngForm">
+<form *ngIf="!isLoggedIn" (ngSubmit)="onSubmit()" #signupForm="ngForm">
     <a href="/">Voltar</a>
     <div class="left-side">
     <h1>Cadastro</h1>
@@ -250,5 +250,9 @@
       <div *ngIf="errorMessage" class="alert">    {{ errorMessage }}   </div>
       <button type="submit">Registrar-se</button>
     </div>
-  </form>
+</form>
+
+<div *ngIf="isLoggedIn">
+  <app-notfound></app-notfound>
+</div>
   

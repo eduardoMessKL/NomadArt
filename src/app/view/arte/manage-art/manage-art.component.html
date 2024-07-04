@@ -1,15 +1,35 @@
-<!-- manage-art.component.html -->
 <div class="manage-art-container">
-  <button (click)="publishArt()">Publicar Arte</button>
-  <div *ngIf="arts.length > 0; else noArt">
+
+  <p class="voltar" (click)="navigateToProfile()">Voltar</p>
+  <section class="banner">
+    <h1>Gerenciar Artes</h1>
+    <p>Aqui você encontra todas as suas obras publicadas, podendo também editá-las!<br><p>Clique no botão abaixo para publicar uma nova obra de arte:</p></p>
+    <button (click)="publishArt()">Publicar Arte</button>
+  </section>
+
+  <section *ngIf="arts.length > 0" class="catalog-edit">
+    <h3>Minhas obras publicadas: <br> <p>Edite qualquer informação de qualquer obra já publicada no seu perfil!</p></h3>
     <div *ngFor="let art of arts" class="art-item">
-      <h3>{{ art.title }}</h3>
-      <img [src]="art.imageUrl" alt="{{ art.title }}">
-      <button (click)="editArt(art.id)">Editar</button>
-      <button (click)="deleteArt(art.id)">Apagar</button>
+      <img [src]="art.imageUrl" alt="{{ art.title }}" class="arte">
+
+      <section class="art-text">
+        <h2>{{ art.title }}</h2>
+        <p maxlength="100">{{ art.description }}</p>
+        <ul>
+          <li>{{ art.technique }}</li>
+          <li>{{ art.year }}</li>
+        </ul>
+      </section>
+
+      <section class="buttons">
+        <button (click)="editArt(art.id)" class="btn-edit">Editar <img src="/assets/edit-icon.png"></button>
+        <button (click)="deleteArt(art.id)" class="btn-delete">Apagar <img src="/assets/delete-icon.png"></button>
+      </section>
+   
     </div>
-  </div>
-  <ng-template #noArt>
+  </section>
+
+  <section *ngIf="arts.length === 0" class="art-none">
     <p>Você não possui nenhuma arte publicada.</p>
-  </ng-template>
+  </section>
 </div>

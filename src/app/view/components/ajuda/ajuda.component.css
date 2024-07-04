@@ -34,7 +34,7 @@
             width: 90%;
             height: 3%;
             display: flex;
-            align-items: start;
+            align-items: flex-start;
         }
         .voltar:hover{
             cursor: pointer;

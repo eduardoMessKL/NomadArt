@@ -19,6 +19,7 @@ export class SignupComponent {
     confirmPassword: '',
     profileDescription: '',
     country: '',
+    instagram: '',
     techniques: {
       oil: false,
       acrylic: false,
@@ -56,55 +57,60 @@ export class SignupComponent {
   }
 
   onSubmit() {
-    if (!this.artist.name || !this.artist.email || !this.artist.password || !this.artist.confirmPassword || !this.artist.profileDescription || !this.artist.country || !this.artist.techniques) {
-      this.errorMessage = 'Preencha todos os campos!';
-      return;
-    }
+      if (!this.artist.name || !this.artist.email || !this.artist.password || !this.artist.confirmPassword || !this.artist.profileDescription || !this.artist.country || !this.artist.techniques) {
+        this.errorMessage = 'Preencha todos os campos!';
+        return;
+      }
 
-    if (this.artist.password !== this.artist.confirmPassword) {
-      this.errorMessage = 'As senhas não coincidem!';
-      return;
-    }
+      if (this.artist.password !== this.artist.confirmPassword) {
+        this.errorMessage = 'As senhas não coincidem!';
+        return;
+      }
 
-    if (this.artist.password.length < 6) {
-      this.errorMessage = 'Mínimo de caracteres para a senha é de 6 elementos!';
-      return;
-    }
+      if (this.artist.password.length < 6) {
+        this.errorMessage = 'Mínimo de caracteres para a senha é de 6 elementos!';
+        return;
+      }
 
-    if (this.artist.profileDescription.length > 500) {
-      this.errorMessage = 'Máximo de caracteres para a descrição é de 500 elementos!';
-      return;
-    }
+      if (this.artist.name.length > 50){
+        this.errorMessage = 'Mínimo de caracteres para o nome é de 50 elementos!'; 
+      }
 
-    this.authService.register(this.artist.email, this.artist.password)
-      .then(res => {
-        const userId = res.user?.uid;
-        if (userId) {
-          if (this.selectedFile) {
-            const filePath = `profile_images/${userId}`;
-            const fileRef = this.storage.ref(filePath);
-            const uploadTask = this.storage.upload(filePath, this.selectedFile);
+      if (this.artist.profileDescription.length > 500) {
+        this.errorMessage = 'Máximo de caracteres para a descrição é de 500 elementos!';
+        return;
+      }
 
-            uploadTask.snapshotChanges().pipe(
-              finalize(() => {
-                fileRef.getDownloadURL().subscribe(url => {
-                  this.saveArtistProfile(userId, url);
-                });
-              })
-            ).subscribe();
-          } else {
-            this.saveArtistProfile(userId, null);
+      this.authService.register(this.artist.email, this.artist.password)
+      //Caso isso fosse pra Service, eu seria obrigado a criar uma Entidade?
+        .then(res => {
+          const userId = res.user?.uid;
+          if (userId) {
+            if (this.selectedFile) {
+              const filePath = `profile_images/${userId}`;
+              const fileRef = this.storage.ref(filePath);
+              const uploadTask = this.storage.upload(filePath, this.selectedFile);
+
+              uploadTask.snapshotChanges().pipe(
+                finalize(() => {
+                  fileRef.getDownloadURL().subscribe(url => {
+                    this.saveArtistProfile(userId, url);
+                  });
+                })
+              ).subscribe();
+            } else {
+              this.saveArtistProfile(userId, null);
+            }
           }
-        }
-      })
-      .catch(error => {
-        console.error('Error registering artist', error);
-        this.errorMessage = this.getErrorMessage(error);
-      });
-      this.spinner.show();
-      setTimeout(()=>{  
-        this.spinner.hide()  
-      }, 3000)
+        })
+        .catch(error => {
+          console.error('Error registering artist', error);
+          this.errorMessage = this.getErrorMessage(error);
+        });
+        this.spinner.show();
+        setTimeout(()=>{  
+          this.spinner.hide()  
+        }, 8000)
   }
 
   saveArtistProfile(artistId: string, profileImageUrl: string | null) {
@@ -113,6 +119,7 @@ export class SignupComponent {
       email: this.artist.email,
       profileDescription: this.artist.profileDescription,
       country: this.artist.country,
+      instagram: this.artist.instagram,
       techniques: this.artist.techniques,
       profileImageUrl: profileImageUrl
     };

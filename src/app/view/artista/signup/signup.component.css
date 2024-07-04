@@ -33,15 +33,15 @@
                 padding-bottom: 0.5rem;
             }
 
-                img{
-                    height: 200px;
-                    width: 200px;
-                    border-radius: 50%;
-                    margin-bottom: 1rem;
+            img{
+                height: 200px;
+                width: 200px;
+                border-radius: 50%;
+                margin-bottom: 1rem;
 
-                    object-fit: cover;
-                    aspect-ratio: 1 / 1;
-                }
+                object-fit: cover;
+                aspect-ratio: 1 / 1;
+            }
 
             label{
                 transition: 0.2s;
@@ -114,8 +114,9 @@
     
             .alert{
                 color: red;
+                text-align: center;
             }
-            textarea, input[type="text"]{
+            textarea, input[type="text"], select{
                 padding: 0.3rem;
                 width: 100%;
                 outline: none;
@@ -123,7 +124,7 @@
                 border-color: black;
                 background-color: #E5E7EB;
             }
-            input[type="text"]{
+            input[type="text"], select{
                 height: 2.5rem;
             }
             ::placeholder{
@@ -285,7 +286,7 @@
                 background-color: #E5E7EB;
                 font-size: 1rem;
             }
-            input[type="text"]{
+            input[type="text"], select{
                 color: black;
                 font-size: 17px;
     

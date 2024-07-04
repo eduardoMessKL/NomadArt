@@ -1,0 +1,219 @@
+@media only screen and (min-width: 1025px){
+    .edit-art-container, form, .left-side, .right-side, .btn{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        span{
+            visibility: hidden;
+        }
+        form{
+            flex-direction: row;
+            background-color: #2A354B;
+            color: white;
+    
+            width: 100%;
+            margin: 3rem;
+            .left-side{
+                width: 40%;
+                margin: 2rem 0 2rem 2rem;
+                h3{
+                    font-weight: 400;
+                    font-size: 1rem;
+                }
+                img{
+                    width: 80%;
+                    max-height: 70vh;
+                    margin: 1rem;
+                    box-shadow: 0px 0px 10px rgb(0, 0, 0);
+                    border-radius: 5px;
+                }
+
+                label{
+                    background-color: #b5c2dc;
+                    color: black;
+                    text-align: center;
+                    width: 30%;
+                    border-radius: 5px;
+                    padding: 0.8rem;
+                    font-size: 0.8rem;
+                    transition: 0.2s;
+                }
+                label:hover{
+                    box-shadow: 0px 0px 10px rgb(0, 0, 0);
+                    cursor: pointer;
+                    transition: 0.2s;
+                }
+                label:active{
+                    box-shadow: none;
+                    background-color: #777f90;
+                }
+            }
+            .right-side{
+                width: 60%;
+                margin: 2rem 2rem 2rem 0;
+                .selects{
+                    width: 100%;
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                }
+                label{
+                    width: 80%;
+                    padding-bottom: 1.5rem;
+                    input, textarea, select{
+                        width: 100%;
+                        padding: 0.5rem;
+                        font-size: 1rem;
+    
+                        border: none;
+                        outline: none;
+                        border-bottom: solid;
+                        border-width: 2px;
+                        border-color: white;
+                        border-top-left-radius: 10px;
+                        border-top-right-radius: 10px;
+                        background-color: #b5c2dc;
+                    }
+                }
+                .btn{
+                    flex-direction: row;
+                    width: 100%;
+                    button{
+                        margin: 1rem;
+                        padding: 0.8rem;
+                        width: 25%;
+                        border: none;
+                        border-radius: 5px;
+                    }
+                    .btn-cancel{
+                        transition: 0.2s;
+                        background-color: #b5c2dc;
+                    }
+                    .btn-cancel:hover{
+                        transition: 0.2s;
+                        box-shadow: 0px 0px 10px #9aa5bd;
+                    }
+                    .btn-cancel:active{
+                        box-shadow: none;
+                        background-color: #9aa5bd;
+                    }
+    
+    
+                    .btn-edit{
+                        background-color: #2ED235;
+                        transition: 0.2s;
+                    }
+                    .btn-edit:hover{
+                        transition: 0.2s;
+                        box-shadow: 0px 0px 10px #1e8d24;
+                    }
+                    .btn-edit:active{
+                        box-shadow: none;
+                        background-color: #1e8d24;
+                    }
+                }
+    
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 1025px){
+    .edit-art-container, form, .left-side, .right-side, .btn{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+
+        span{
+            text-align: start;
+            width: 90%;
+            height: 5%;
+            padding: 1rem;
+        }
+        span{
+            text-align: start;
+            width: 90%;
+            height: 5%;
+            padding: 1rem;
+            font-size: 0.8rem;
+        }
+        form{
+            background-color: #2A354B;
+            color: white;
+    
+            width: 100%;
+            margin-top: 2rem;
+
+            .left-side{
+                padding-top: 2rem;
+                h3{
+                    font-weight: 400;
+                    font-size: 1rem;
+                }
+                img{
+                    height: 225px;
+                    width: 250px;
+                    object-fit: cover;
+
+                    margin: 1rem;
+                    box-shadow: 0px 0px 10px rgb(0, 0, 0);
+                    border-radius: 5px;
+                }
+
+                label{
+                    background-color: #b5c2dc;
+                    color: black;
+                    padding: 0.8rem;
+                    border-radius: 5px;
+                    font-size: 0.8rem;
+                }
+            }
+            .right-side{
+                padding-top: 2rem;
+                label, .selects{
+                    width: 80%;
+                    padding-bottom: 1.5rem;
+                    input, textarea, select{
+                        width: 100%;
+                        padding: 0.5rem;
+                        font-size: 1rem;
+    
+                        border: none;
+                        outline: none;
+                        border-bottom: solid;
+                        border-width: 2px;
+                        border-color: white;
+                        border-top-left-radius: 10px;
+                        border-top-right-radius: 10px;
+                        background-color: #b5c2dc;
+                    }
+                }
+                .btn{
+                    flex-direction: row;
+                    width: 100%;
+                    button{
+                        margin: 1rem;
+                        padding: 0.8rem;
+                        width: 25%;
+                        border: none;
+                        border-radius: 5px;
+                    }
+                    .btn-cancel{
+                        transition: 0.2s;
+                        background-color: #b5c2dc;
+                    }
+    
+    
+                    .btn-edit{
+                        background-color: #2ED235;
+                        transition: 0.2s;
+                    }
+                }
+    
+            }
+        }
+    }
+}

@@ -13,10 +13,12 @@ import { DescriptionArtComponent } from './view/arte/description-art/description
 import { AuthGuard } from './common/guard/auth.guard';
 import { AjudaComponent } from './view/components/ajuda/ajuda.component';
 import { GalleryComponent } from './view/components/gallery/gallery.component';
+import { CopyrightComponent } from './view/components/copyright/copyright.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/catalog', pathMatch: 'full'},
   { path: 'notfound', component: NotfoundComponent},
+  { path: 'copyright', component: CopyrightComponent},
   { path: 'help', component: AjudaComponent },
   { path: 'signup', component: SignupComponent},
   { path: 'signin', component: SigninComponent},

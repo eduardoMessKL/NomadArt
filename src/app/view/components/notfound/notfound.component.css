@@ -1,0 +1,44 @@
+.notfound-container, .btn-section, .text-section{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+
+    color: white;
+    background-color: #2A354B;
+
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+    .text-section{
+        margin: 0;
+        padding-bottom: 0;
+        img{
+            padding-top: 1rem;
+            padding-bottom: 1.5rem;
+            height: 5vh;
+        }
+        h1{
+            font-weight: 100;
+            font-size: 3rem;
+            padding: 1rem;
+        }
+        p{
+            padding: 1rem;
+        }
+        a{
+            color: white;
+        }
+    }
+    .btn-section{
+        margin: 0;
+        button{
+            margin-top: 1rem;
+            padding: 1rem;
+            border-radius: 5px;
+        }
+    }
+}
+

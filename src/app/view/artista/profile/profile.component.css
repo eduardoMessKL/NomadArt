@@ -105,12 +105,12 @@
                 justify-content: center;
                 align-items: center;
     
-                width: 30%;
+                width: 40%;
     
                 img{
                     image-rendering: 1dpi;
-                    height: 300px;
-                    width: 300px;
+                    height: 350px;
+                    width: 350px;
                     border-radius: 50%;
                     box-shadow: 0px 0px 10px black;
 
@@ -120,7 +120,7 @@
     
             }
             .right-side-profile{
-                width: 30%;
+                width: 40%;
             }
     
             p{

@@ -102,8 +102,7 @@ export class CatalogComponent implements OnInit {
   }
 
   navigateToGallery(){
-    this.router.navigate([`/gallery`])
-    console.log('te amo vitória')
+    this.router.navigate([`/gallery`]);
   }
 
   shuffleArray(array: any[]): any[] {

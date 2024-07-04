@@ -23,7 +23,7 @@
   <section class="infos-profile">
     <div class="left-side-profile">
       <img *ngIf="artist.profileImageUrl" [src]="artist.profileImageUrl">
-      <img *ngIf="!artist.profileImageUrl" src="/assets/user2-icon.png">
+      <img *ngIf="!artist.profileImageUrl" src="/assets/profile-icon.png">
       <h1>{{ artist.name }}</h1>
       <p>País: {{ artist.country }}</p>
     </div>
@@ -39,6 +39,7 @@
         </ul>
       </h3>
       <h3>Email para contato: <p>{{ artist.email }}</p></h3>
+      <h3 *ngIf="artist.instagram" class="insta">Instagram: <p> @{{ artist.instagram }}</p></h3>
     </div>
   </section>
 </div>

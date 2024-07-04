@@ -108,6 +108,7 @@
                 width: 30%;
     
                 img{
+                    image-rendering: 1dpi;
                     height: 300px;
                     width: 300px;
                     border-radius: 50%;
@@ -135,6 +136,12 @@
             }
             h1{
                 text-align: center;
+            }
+            .insta{
+                display: flex;
+                p{
+                    padding-left: 0.3rem;
+                }
             }
     
         }

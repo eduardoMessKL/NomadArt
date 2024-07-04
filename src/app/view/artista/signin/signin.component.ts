@@ -40,7 +40,7 @@ export class SigninComponent {
       this.spinner.show();
       setTimeout(()=>{  
         this.spinner.hide()  
-      }, 3000)
+      }, 5000)
   }
 
   navigateToAjuda(){

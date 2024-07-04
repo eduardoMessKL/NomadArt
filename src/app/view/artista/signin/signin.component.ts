@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../../../model/service/authService/auth.service';
 import { AlertService } from 'src/app/common/alert.service';
@@ -9,16 +9,23 @@ import { NgxSpinnerService } from 'ngx-spinner';
   templateUrl: './signin.component.html',
   styleUrls: ['./signin.component.css']
 })
-export class SigninComponent {
+export class SigninComponent implements OnInit {
   email: string = '';
   password: string = '';
   errorMessage: string = '';
+  isLoggedIn: boolean = false;
 
   constructor(
     private router: Router,
     private authService: AuthService,
     private spinner: NgxSpinnerService
   ) { }
+
+  ngOnInit(){
+    this.authService.isLoggedIn().subscribe(loggedIn =>{
+      this.isLoggedIn = loggedIn;
+    })
+  }
 
   onSubmit() {
     if (!this.email || !this.password) {

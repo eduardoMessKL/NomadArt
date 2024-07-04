@@ -46,7 +46,4 @@ export class SigninComponent {
   navigateToAjuda(){
     this.router.navigate([`/help`])
   }
-  navigateToCatalog(){
-    this.router.navigate(['/catalog'])
-  }
 }

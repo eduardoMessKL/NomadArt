@@ -13,6 +13,6 @@ export class NotfoundComponent {
   ){}
 
   navigateToHome(){
-    this.router.navigate(['/catalog'])
+    this.router.navigate(['/'])
   }
 }

@@ -63,6 +63,6 @@ export class ProfileComponent implements OnInit {
   }
 
   navigateToCatalog(){
-    this.router.navigate([`/catalog`])
+    this.router.navigate([`/`])
   }
 }

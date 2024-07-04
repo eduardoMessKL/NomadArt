@@ -16,7 +16,7 @@ import { GalleryComponent } from './view/components/gallery/gallery.component';
 import { CopyrightComponent } from './view/components/copyright/copyright.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/catalog', pathMatch: 'full'},
+  { path: '', redirectTo: '', pathMatch: 'full'},
   { path: 'notfound', component: NotfoundComponent},
   { path: 'copyright', component: CopyrightComponent},
   { path: 'help', component: AjudaComponent },
@@ -27,7 +27,7 @@ const routes: Routes = [
   { path: 'profile/:id/manage-art', component: ManageArtComponent, canActivate: [AuthGuard] },
   { path: 'profile/:id/publish-art', component: PublishArtComponent, canActivate: [AuthGuard] },
   { path: 'profile/:id/edit-art/:artId', component: EditArtComponent, canActivate: [AuthGuard] },
-  { path: 'catalog', component: CatalogComponent},
+  { path: '', component: CatalogComponent},
   { path: 'gallery', component: GalleryComponent},
   { path: 'description-art/:artistId/:artId', component: DescriptionArtComponent },
 

@@ -27,6 +27,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { GalleryComponent } from './view/components/gallery/gallery.component';
+import { CopyrightComponent } from './view/components/copyright/copyright.component';
 
 console.log(environment)
 
@@ -52,6 +53,7 @@ const routes: Routes = [
     DescriptionArtComponent,
     AjudaComponent,
     GalleryComponent,
+    CopyrightComponent,
   ],
   imports: [
     BrowserModule,

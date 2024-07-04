@@ -93,6 +93,7 @@
                     .btn-cancel:hover{
                         transition: 0.2s;
                         box-shadow: 0px 0px 10px #9aa5bd;
+                        cursor: pointer;
                     }
                     .btn-cancel:active{
                         box-shadow: none;
@@ -107,6 +108,7 @@
                     .btn-edit:hover{
                         transition: 0.2s;
                         box-shadow: 0px 0px 10px #1e8d24;
+                        cursor: pointer;
                     }
                     .btn-edit:active{
                         box-shadow: none;

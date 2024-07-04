@@ -49,6 +49,7 @@
             .gerenciar-art:hover{
                 transition: 0.2s;
                 box-shadow: 0px 0px 15px #2ED235;
+                cursor: pointer;
             }
             .gerenciar-art:active{
                 background-color: rgb(16, 170, 16);
@@ -63,6 +64,7 @@
             .btn-blue:hover{
                 transition: 0.2s;
                 box-shadow: 0px 0px 15px #9aa5bd;
+                cursor: pointer;
             }
             .btn-blue:active{
                 background-color: #9aa5bd;;
@@ -77,6 +79,7 @@
             .logout:hover{
                 transition: 0.2s;
                 box-shadow: 0px 0px 10px #F22929;
+                cursor: pointer;
             }
             .logout:active{
                 background-color: rgb(180, 30, 30);

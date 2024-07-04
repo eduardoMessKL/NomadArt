@@ -94,6 +94,9 @@
             box-shadow: 0px 0px 20px rgb(0, 0, 0);
             cursor: pointer;
         }
+        button:active{
+            box-shadow: none;
+        }
     }
     
     .other-arts{
@@ -119,6 +122,9 @@
             transition: 0.2s;
             box-shadow: 0px 0px 5px rgb(0, 0, 0);
             cursor: pointer;
+        }
+        button:active{
+            box-shadow: none;
         }
         h2{
             padding: 1rem;

@@ -101,6 +101,9 @@
                 border-radius:100px;
                 font-size: 20px;
             }
+            select:hover{
+                cursor: pointer;
+            }
         }
     
 
@@ -160,14 +163,15 @@
                         font-size: 0.7rem;
                     }
                 }
-                .art-item:hover{
-                    transition: 0.2s;
-                    box-shadow: 0px 3px 40px rgb(0, 0, 0);
-                }
-                .art-item:active{
-                    box-shadow: none;
-                    background-color: #b5c2dc;
-                }
+            .art-item:hover{
+                transition: 0.2s;
+                box-shadow: 0px 3px 40px rgb(0, 0, 0);
+                cursor: pointer;
+            }
+            .art-item:active{
+                box-shadow: none;
+                background-color: #b5c2dc;
+            }
             
             img{
                 display: block;
@@ -198,7 +202,7 @@
                     background-color: #939393;
                 }
             
-        }  
+        } 
 
 
       .destaques{

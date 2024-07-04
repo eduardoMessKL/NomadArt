@@ -121,15 +121,18 @@
             .btn-delete:hover{
                 transition: 0.2s;
                 box-shadow: 0px 0px 10px #ab1e1e;
+                cursor: pointer;
             }
             .btn-cancel:hover{
                 transition: 0.2s;
                 box-shadow: 0px 0px 10px #687183;
+                cursor: pointer;
             }
             .btn-edit:hover{
                 transition: 0.2s;
                 box-shadow: 0px 0px 10px  #239328;
                 font-weight: bold;
+                cursor: pointer;
             }
 
             .btn-delete:active{

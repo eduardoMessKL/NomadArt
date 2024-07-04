@@ -1,25 +1,38 @@
 <!-- description-art.component.html -->
 <div class="description-art-container">
+  <a href="/catalog">Voltar</a>
+  <section class="art-details">
+    <h1>Descrição da arte</h1>
+    <p>Todas as informações da arte selecionada você encontra aqui!</p>
     <h2>{{ art.title }}</h2>
-    <img [src]="art.imageUrl" alt="{{ art.title }}">
-    <p>{{ art.description }}</p>
-    <p>Técnica: {{ art.technique }}</p>
+    <span>Técnica utilizada: </span>
+    <p>{{ art.technique }}</p>
+    <div class="imagem">
+      <img [src]="art.imageUrl" alt="{{ art.title }}">
+    </div>
+    <h3>Descrição:</h3>
+    <p class="description">{{ art.description }}</p>
+  </section>
 
-  <div>
+  <section class="artist-details">
     <h2>Artista:</h2>
-    <h3>{{ artistProfile.name }}</h3>
-    <img [src]="artistProfile.profileImageUrl" alt="{{ artistProfile.name }}">
-    <p>quem sou eu? <br>{{ artistProfile.profileDescription }}</p>
-    <button (click)="viewArtistProfile()">Ver Perfil do Artista</button>
-  </div>
+    <img *ngIf="artistProfile.profileImageUrl"  [src]="artistProfile.profileImageUrl" alt="{{ artistProfile.name }}">
+    <img *ngIf="!artistProfile.profileImageUrl" src="/assets/profile-icon.png">
 
+    <h3>{{ artistProfile.name }}</h3>
+    <p>{{ artistProfile.country }}</p>
+    <button (click)="viewArtistProfile()">Ver Perfil Completo</button>
+  </section>
+
+  <section class="other-arts">
   <h2>Outras artes de {{ artistProfile.name }}</h2>
-  <div *ngIf="otherArts.length > 0">
-    <div *ngFor="let arte of otherArts.slice(1, 4)">
-      <div>{{ arte.title }}</div>
-      <img [src]="arte.imageUrl" alt="{{ arte.title }}">
+    <div *ngIf="otherArts.length > 0"  class="arts-container">
+      <div *ngFor="let arte of otherArts.slice(0, 3)">
+        <img [src]="arte.imageUrl" alt="{{ arte.title }}">
+        <div class="title-other">{{ arte.title }}</div>
+      </div>
     </div>
     <button (click)="viewArtistProfile()">Ver mais</button>
-  </div>
+  </section>
 </div>
   

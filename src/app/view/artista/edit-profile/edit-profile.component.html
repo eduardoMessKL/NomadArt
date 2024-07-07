@@ -23,7 +23,7 @@
           <img *ngIf="!selectedImageUrl && artist.profileImageUrl" [src]="artist.profileImageUrl">
           <img *ngIf="selectedImageUrl" [src]="selectedImageUrl">
           <label for="input-file">Enviar Foto</label>
-          <input type="file" id="profileImage" (change)="onFileSelected($event)" id="input-file" hidden>
+          <input type="file" id="profileImage" (change)="onFileSelected($event)" id="input-file" hidden accept="image/png, image/jpeg, image/jpg">
       </section>
 
       <section class="right-side">

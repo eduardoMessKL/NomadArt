@@ -19,7 +19,7 @@
       <img *ngIf="!selectedImageUrl" [src]="art.imageUrl">
       <img *ngIf="selectedImageUrl" [src]="selectedImageUrl" alt="{{ art.title }}">
       <label for="input-file">Escolher Foto</label>
-      <input type="file" (change)="onFileSelected($event)" id="input-file" hidden>
+      <input type="file" (change)="onFileSelected($event)" id="input-file" hidden accept="image/png, image/jpeg, image/jpg">
     </section>
 
     <section class="right-side">

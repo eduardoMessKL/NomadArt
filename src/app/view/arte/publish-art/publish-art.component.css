@@ -320,8 +320,9 @@
                 select{
                     transition: 0.2s;
                     width: 70%;
+                    height: 3rem;
                     padding: 0.8rem;
-                    margin: 1.8rem;
+                    margin: 1rem;
             
                     border: none;
                     outline: none;

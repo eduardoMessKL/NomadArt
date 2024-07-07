@@ -39,8 +39,9 @@
         h1, h3, h2, p, a{
             opacity: 80%;
             color: white;
-            font-size: 0.65rem;
+            font-size: 0.5rem;
             padding: 0.3rem;
+            text-wrap: wrap;
         }
         img{
             height: 1rem;

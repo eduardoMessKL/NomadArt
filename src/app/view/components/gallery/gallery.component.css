@@ -201,7 +201,8 @@
                         text-wrap: nowrap;
                         inline-size: 180px;
                         overflow: hidden;
-                        text-overflow: ellipsis
+                        text-overflow: ellipsis;
+                        text-align: start;
                     }
                     p{
                         font-size: 0.5rem;
@@ -219,7 +220,7 @@
             width: 90%;
             text-align: center;
             font-size: 2rem;
-            padding: 5rem;
+            padding: 3rem;
         }
     }
     

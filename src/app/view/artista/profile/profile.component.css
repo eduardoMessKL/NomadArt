@@ -388,7 +388,8 @@
                             font-size: 1rem;
                             inline-size: 150px;
                             overflow: hidden;
-                            text-overflow: ellipsis
+                            text-overflow: ellipsis;
+                            text-align: start;
                         }
                     }
                 }

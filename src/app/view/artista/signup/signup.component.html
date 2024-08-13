@@ -16,7 +16,7 @@
       <label for="input-file">Escolher Foto *</label>
       <div class="inputs">
         <input type="file" (change)="onFileSelected($event)" id="input-file" accept="image/png, image/jpeg, image/jpg" hidden>
-        <input type="text" [(ngModel)]="artist.name" name="name" placeholder="Nome *" required>
+        <input type="text" [(ngModel)]="artist.name" name="name" placeholder="Nome *" maxlength="50"  required>
         <input type="email" [(ngModel)]="artist.email" name="email" placeholder="Email *" required>
         <input type="password" [(ngModel)]="artist.password" name="password" placeholder="Senha *" required>
         <input type="password" [(ngModel)]="artist.confirmPassword" name="confirmPassword" placeholder="Repetir Senha *" required>

@@ -6,7 +6,6 @@ import { AppComponent } from './app.component';
 
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
-import { environment } from 'src/environments/environment';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { AngularFireStorageModule } from '@angular/fire/compat/storage';
 import { SignupComponent } from './view/artista/signup/signup.component';
@@ -28,6 +27,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { GalleryComponent } from './view/components/gallery/gallery.component';
 import { CopyrightComponent } from './view/components/copyright/copyright.component';
+import { environment } from 'src/environments/environment.development';
 
 console.log(environment)
 
